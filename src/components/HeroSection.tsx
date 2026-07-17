@@ -180,9 +180,13 @@ export const HeroSection: React.FC = () => {
           {/* Right Column: Hero Visual with Transparent/Unboxed Image */}
           <div className="hero__visual">
             <img 
-              src="/images/hero/hero-1.png" 
+              src="/images/hero/hero-1.webp" 
               alt="Equipe técnica e serviços de dedetização e desentupidora na Grande São Paulo" 
               className="hero__visual-img"
+              width="600"
+              height="600"
+              loading="eager"
+              fetchPriority="high"
             />
 
             {/* Floating Trust Badge */}

@@ -15,12 +15,12 @@ export const Footer: React.FC = () => {
               style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}
             >
               <img
-                src="/images/logos/logo.png"
+                src="/images/logos/logo.webp"
                 alt="Dedetizadora Maringá"
                 style={{ height: "84px", width: "auto", objectFit: "contain" }}
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src =
-                    "/images/logos/logo.svg";
+                    "/images/logos/logo.png";
                 }}
               />
             </div>

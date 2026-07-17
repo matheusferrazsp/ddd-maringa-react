@@ -18,10 +18,14 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
 
-    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <!-- LCP Image Preload (Hero WebP) -->
+    <link rel="preload" href="/images/hero/hero-1.webp" as="image" fetchpriority="high" />
+
+    <!-- Google Fonts: Outfit & Plus Jakarta Sans (Async non-blocking load) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" /></noscript>
   </head>
   <body class="bg-white text-slate-900 font-sans antialiased selection:bg-emerald-500 selection:text-white overflow-x-hidden">
     <div id="root"></div>

@@ -33,10 +33,10 @@ export const Navbar: React.FC = () => {
       {/* Drawer Header */}
       <div className="navbar__drawer-header">
         <img 
-          src="/images/logos/logo.png" 
-          alt="Dedetizadora Maringá" 
-          className="navbar__drawer-logo"
-          onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/logos/logo.svg'; }}
+              src="/images/logos/logo.webp" 
+              alt="Dedetizadora Maringá" 
+              className="navbar__drawer-logo"
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/logos/logo.png'; }}
         />
         <button
           onClick={() => setMobileMenuOpen(false)}
@@ -101,10 +101,10 @@ export const Navbar: React.FC = () => {
           {/* Logo */}
           <a href="#" className="navbar__logo">
             <img 
-              src="/images/logos/logo.png" 
+              src="/images/logos/logo.webp" 
               alt="Dedetizadora Maringá" 
               className={`navbar__logo-img ${scrolled ? 'scrolled' : ''}`}
-              onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/logos/logo.svg'; }}
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/logos/logo.png'; }}
             />
           </a>
 
