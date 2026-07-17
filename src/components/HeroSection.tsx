@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
 import {
   ArrowRight,
   PhoneCall,
@@ -26,13 +25,7 @@ const rotatingItems: RotatingItem[] = [
 ];
 
 export const HeroSection: React.FC = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const buttonsRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
   const bgGlowRef = useRef<HTMLDivElement>(null);
-
   const [wordIndex, setWordIndex] = useState(0);
   const [isFading, setIsFading] = useState(false);
 
@@ -49,58 +42,18 @@ export const HeroSection: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const handleMouseMove = (e: MouseEvent) => {
-        const { clientX, clientY } = e;
-        const xPos = (clientX / window.innerWidth - 0.5) * 40;
-        const yPos = (clientY / window.innerHeight - 0.5) * 40;
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const xPos = (clientX / window.innerWidth - 0.5) * 40;
+      const yPos = (clientY / window.innerHeight - 0.5) * 40;
 
-        if (bgGlowRef.current) {
-          gsap.to(bgGlowRef.current, {
-            x: xPos * 2,
-            y: yPos * 2,
-            duration: 1.5,
-            ease: "power2.out",
-          });
-        }
-      };
+      if (bgGlowRef.current) {
+        bgGlowRef.current.style.transform = `translate(${xPos * 2}px, ${yPos * 2}px)`;
+      }
+    };
 
-      window.addEventListener("mousemove", handleMouseMove);
-
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      tl.fromTo(
-        titleRef.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
-      )
-        .fromTo(
-          subtitleRef.current,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          "-=0.6",
-        )
-        .fromTo(
-          buttonsRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          "-=0.5",
-        )
-        .fromTo(
-          cardsRef.current?.children
-            ? Array.from(cardsRef.current.children)
-            : [],
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.15, duration: 0.8 },
-          "-=0.4",
-        );
-
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-      };
-    }, heroRef);
-
-    return () => ctx.revert();
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const whatsappUrl =
@@ -109,15 +62,19 @@ export const HeroSection: React.FC = () => {
   const currentItem = rotatingItems[wordIndex];
 
   return (
-    <section ref={heroRef} id="inicio" className="hero">
+    <section id="inicio" className="hero">
       {/* Background Glows */}
-      <div ref={bgGlowRef} className="hero__bg-glow-1" />
+      <div
+        ref={bgGlowRef}
+        className="hero__bg-glow-1"
+        style={{ transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}
+      />
       <div className="hero__bg-glow-2" />
 
       <div className="container relative z-10">
         <div className="hero__layout">
           {/* Left Column: Text & CTA */}
-          <div className="hero__content">
+          <div className="hero__content hero-animate-slide-up">
             {/* Badge */}
             <div className="hero__badge">
               <Sparkles className="w-4 h-4 flex-shrink-0" />
@@ -127,7 +84,7 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Main Title with Animated Grammar-Matched Prefix & Word */}
-            <h1 ref={titleRef} className="hero__title">
+            <h1 className="hero__title">
               <span 
                 style={{ 
                   transition: "opacity 0.38s ease",
@@ -150,12 +107,12 @@ export const HeroSection: React.FC = () => {
             </h1>
 
             {/* Subtitle */}
-            <p ref={subtitleRef} className="hero__subtitle">
+            <p className="hero__subtitle">
               Atendimento rápido e certificado em toda Grande São Paulo. Soluções seguras com laudo técnico e garantia real para residências e empresas.
             </p>
 
             {/* CTA Buttons */}
-            <div ref={buttonsRef} className="hero__buttons">
+            <div className="hero__buttons">
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -178,7 +135,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Right Column: Hero Visual with Transparent/Unboxed Image */}
-          <div className="hero__visual">
+          <div className="hero__visual hero-animate-fade-up-delayed">
             <img 
               src="/images/hero/hero-1.webp" 
               alt="Equipe técnica e serviços de dedetização e desentupidora na Grande São Paulo" 
@@ -198,7 +155,7 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Key Trust Stats Grid below */}
-        <div ref={cardsRef} className="hero__stats-grid">
+        <div className="hero__stats-grid hero-animate-fade-up-stats">
           <div className="hero__stat-card">
             <div
               style={{
