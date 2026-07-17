@@ -53,7 +53,8 @@ export const ParallaxBanner: React.FC = () => {
         ref={bgImgRef}
         className="parallax-banner__bg"
         style={{
-          backgroundImage: `url('https://dedetizadoramaringa.com.br/wp-content/uploads/2024/01/background-of-the-geometric-pattern.jpg')`,
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.35) 1px, transparent 0)`,
+          backgroundSize: '32px 32px',
         }}
       />
       {/* Dark & Glow Overlays */}
