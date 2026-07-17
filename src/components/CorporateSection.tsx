@@ -337,8 +337,12 @@ export const CorporateSection: React.FC = () => {
                   {/* Logo Card 1: ABRACAF */}
                   <div className="corporate__partner-card">
                     <img
-                      src="/images/parceiros/Abracaf_150x150.png"
+                      src="/images/parceiros/abracaf.svg"
                       alt="ABRACAF"
+                      loading="lazy"
+                      decoding="async"
+                      width="150"
+                      height="70"
                       style={{
                         maxHeight: "72px",
                         maxWidth: "170px",
@@ -346,7 +350,7 @@ export const CorporateSection: React.FC = () => {
                       }}
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src =
-                          "/images/parceiros/abracaf.svg";
+                          "/images/parceiros/Abracaf_150x150.png";
                       }}
                     />
                   </div>
@@ -354,8 +358,12 @@ export const CorporateSection: React.FC = () => {
                   {/* Logo Card 2: Camara Municipal de Embu das Artes */}
                   <div className="corporate__partner-card">
                     <img
-                      src="/images/parceiros/camara-municipal-embu.png"
+                      src="/images/parceiros/camara-embu.svg"
                       alt="Câmara Municipal de Embu das Artes"
+                      loading="lazy"
+                      decoding="async"
+                      width="180"
+                      height="75"
                       style={{
                         maxHeight: "78px",
                         maxWidth: "180px",
@@ -363,7 +371,7 @@ export const CorporateSection: React.FC = () => {
                       }}
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src =
-                          "/images/parceiros/camara-embu.svg";
+                          "/images/parceiros/camara-municipal-embu.webp";
                       }}
                     />
                   </div>

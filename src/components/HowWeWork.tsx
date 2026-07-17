@@ -107,14 +107,22 @@ export const HowWeWork: React.FC = () => {
             style={{ position: "relative", height: "100%", minHeight: "280px" }}
           >
             <img
-              src="/images/servicos/area-externa.jpg"
+              src="/images/servicos/area-externa.webp"
               alt="Aplicação de tecnologia de pulverização e nebulização em áreas externas de residências, condomínios e piscinas"
+              loading="lazy"
+              decoding="async"
+              width="640"
+              height="480"
               style={{
                 position: "absolute",
                 inset: 0,
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+              }}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src =
+                  "/images/servicos/area-externa.jpg";
               }}
             />
           </div>
