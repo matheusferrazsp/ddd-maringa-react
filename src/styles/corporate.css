@@ -1,0 +1,381 @@
+/* ==========================================================================
+   CORPORATE SECTION (PJ / B2B) COMPONENT STYLES - WHITE & BLUE THEME
+   ========================================================================== */
+
+.corporate-section {
+  position: relative;
+  padding: 6.5rem 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.corporate__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.corporate__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.35rem;
+  border-radius: 9999px;
+  background: rgba(0, 168, 255, 0.1);
+  border: 1px solid rgba(0, 168, 255, 0.3);
+  color: #0082c8;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+}
+
+.corporate__title {
+  font-size: clamp(2.2rem, 4.2vw, 3.25rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.corporate__desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+/* Legal Certifications Grid */
+.corporate__certs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.75rem;
+}
+
+.corporate__cert-card {
+  padding: 1.35rem;
+  background: #f8fafc;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.corporate__cert-card:hover {
+  border-color: #00a8ff;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 168, 255, 0.12);
+}
+
+.corporate__cert-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.85rem;
+  background: rgba(0, 168, 255, 0.12);
+  color: #00a8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+}
+
+.corporate__cert-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.corporate__cert-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* Sectors Tabs Box */
+.corporate__sectors-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.75rem;
+  padding: 2.5rem;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+  position: relative;
+}
+
+.corporate__sectors-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.corporate__sectors-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.corporate__sectors-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.corporate__tabs {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.corporate__tab-btn {
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.85rem;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.corporate__tab-btn:hover {
+  border-color: #00a8ff;
+  color: #00a8ff;
+}
+
+.corporate__tab-btn.active {
+  background: #00a8ff;
+  color: #ffffff;
+  font-weight: 700;
+  border-color: #00a8ff;
+  box-shadow: 0 4px 18px rgba(0, 168, 255, 0.3);
+}
+
+.corporate__sector-content {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.corporate__sector-heading {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #00a8ff;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.corporate__sector-text {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.corporate__feature-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.corporate__feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.corporate__check-icon {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: rgba(0, 168, 255, 0.12);
+  color: #00a8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Institutional Partners Box & Cards */
+.corporate__partners-box {
+  margin-top: 4.5rem;
+  padding: 3rem 2rem;
+  background: #f8fafc;
+  border-radius: 1.75rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.corporate__partner-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding: 1.5rem 3.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+  min-width: 240px;
+  height: 115px;
+  box-sizing: border-box;
+}
+
+/* Responsive Rules for Mobile UI/UX Optimization */
+@media (max-width: 992px) {
+  .corporate-section {
+    padding: 4rem 0 !important;
+  }
+  .corporate__title {
+    font-size: clamp(1.65rem, 5.2vw, 2.35rem) !important;
+    line-height: 1.2 !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .corporate__grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .corporate__grid > div {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  .corporate__tabs {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    gap: 0.65rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+    scroll-snap-type: x mandatory;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .corporate__tab-btn {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    padding: 0.75rem 1.35rem;
+    font-size: 0.88rem;
+  }
+  .corporate__certs {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 1.1rem !important;
+    padding: 0.5rem 7% 1.25rem 7% !important;
+    margin-bottom: 1.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .corporate__cert-card {
+    flex: 0 0 86% !important;
+    max-width: 420px !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
+    margin-bottom: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .corporate__sectors-box {
+    padding: 1.75rem 1.35rem !important;
+    border-radius: 1.35rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .corporate__partners-box {
+    margin-top: 3rem !important;
+    padding: 2rem 1.25rem !important;
+    border-radius: 1.35rem !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .corporate-section {
+    padding: 3rem 0 !important;
+  }
+  .corporate__title {
+    font-size: clamp(1.4rem, 5.8vw, 1.8rem) !important;
+    line-height: 1.22 !important;
+  }
+  .corporate__certs {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 0.85rem !important;
+  }
+  .corporate__cert-card {
+    flex: 0 0 88% !important;
+    padding: 1.25rem !important;
+  }
+  .corporate__sectors-box {
+    padding: 1.35rem 1rem !important;
+    border-radius: 1.25rem !important;
+  }
+  .corporate__sector-content {
+    padding: 1.25rem 1rem !important;
+    border-radius: 1rem !important;
+  }
+  .corporate__sectors-title {
+    font-size: 1.25rem !important;
+  }
+  .corporate__partners-box {
+    margin-top: 2.5rem !important;
+    padding: 1.5rem 0.85rem !important;
+    border-radius: 1.25rem !important;
+  }
+  .corporate__partner-card {
+    padding: 1rem 1.5rem !important;
+    min-width: 180px !important;
+    height: 95px !important;
+  }
+}
+
+/* Mobile Swipe Indicator Pill */
+.mobile-swipe-hint {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .mobile-swipe-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #00a8ff;
+    background: rgba(0, 168, 255, 0.08);
+    border: 1px solid rgba(0, 168, 255, 0.2);
+    padding: 0.4rem 0.85rem;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+  }
+}

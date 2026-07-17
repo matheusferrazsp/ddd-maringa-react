@@ -1,0 +1,359 @@
+/* ==========================================================================
+   NAVBAR COMPONENT STYLES - DEDETIZADORA MARINGÁ (WHITE & BLUE THEME)
+   ========================================================================== */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4.5rem;
+  z-index: 99990 !important;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.03);
+}
+
+.navbar--scrolled {
+  height: 3.85rem;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+}
+
+.navbar__container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 1420px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+/* Brand Logo */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  z-index: 99992 !important;
+  flex-shrink: 0;
+  justify-self: start;
+}
+
+.navbar__logo-img {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.navbar__logo-img.scrolled {
+  height: 58px;
+}
+
+.navbar__logo-icon-wrapper {
+  position: relative;
+  width: 2.85rem;
+  height: 2.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__logo-icon-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.85rem;
+  background: rgba(0, 168, 255, 0.2);
+  filter: blur(8px);
+}
+
+.navbar__logo-icon {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.85rem;
+  background: #ffffff;
+  border: 1.5px solid rgba(0, 168, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00a8ff;
+  box-shadow: 0 4px 12px rgba(0, 168, 255, 0.15);
+}
+
+.navbar__logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar__logo-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.navbar__logo-subtitle {
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+  white-space: nowrap;
+}
+
+/* Desktop Navigation */
+.navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  margin: 0 auto;
+  justify-self: center;
+}
+
+.navbar__nav-link {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+  padding: 0.4rem 0;
+  white-space: nowrap;
+}
+
+.navbar__nav-link:hover {
+  color: #00a8ff;
+}
+
+.navbar__nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #00a8ff;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.navbar__nav-link:hover::after {
+  width: 100%;
+}
+
+/* Actions Right */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  justify-self: end;
+}
+
+.navbar__phone {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 0.55rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.navbar__phone:hover {
+  border-color: #0284c7;
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.05);
+}
+
+.navbar__cta-btn {
+  padding: 0.52rem 1.05rem !important;
+  font-size: 0.82rem !important;
+  min-height: 38px !important;
+  border-radius: 0.55rem !important;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+/* Mobile Toggle */
+.navbar__mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 99992 !important;
+}
+
+/* Mobile Drawer - Premium Solid Opaque Overlay */
+.navbar__mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff !important;
+  z-index: 999999 !important;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.navbar__mobile-drawer.open {
+  transform: translateX(0);
+}
+
+/* Drawer Header */
+.navbar__drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  width: 100%;
+}
+
+.navbar__drawer-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar__drawer-close {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* Drawer Nav Links */
+.navbar__mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.navbar__mobile-link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.95rem;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.navbar__mobile-link-card.highlight {
+  border-color: #00a8ff;
+  background: rgba(0, 168, 255, 0.08);
+  color: #0082c8;
+}
+
+.navbar__mobile-link-card:active {
+  transform: scale(0.98);
+}
+
+/* Drawer Bottom Footer */
+.navbar__mobile-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.navbar__mobile-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 0.95rem 1.25rem !important;
+  font-size: 0.95rem !important;
+  min-height: 50px;
+  border-radius: 0.85rem;
+}
+
+/* Responsive Rules for Header to Prevent Squeezing & Optimize Mobile Space */
+@media (max-width: 1180px) {
+  .navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .navbar__nav {
+    display: none;
+  }
+  .navbar__actions {
+    display: flex;
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+  .navbar__mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar__logo-img {
+    height: 54px;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    height: 4.6rem;
+  }
+  .navbar--scrolled {
+    height: 4.2rem;
+  }
+  .navbar__container {
+    padding: 0 1rem;
+  }
+  .navbar__logo-img {
+    height: 42px !important;
+  }
+  .navbar__actions {
+    display: none;
+  }
+}
