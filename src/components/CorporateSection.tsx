@@ -337,7 +337,7 @@ export const CorporateSection: React.FC = () => {
                   {/* Logo Card 1: ABRACAF */}
                   <div className="corporate__partner-card">
                     <img
-                      src="/images/parceiros/abracaf.svg"
+                      src="/images/parceiros/Abracaf_150x150.png"
                       alt="ABRACAF"
                       loading="lazy"
                       decoding="async"
@@ -350,7 +350,7 @@ export const CorporateSection: React.FC = () => {
                       }}
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src =
-                          "/images/parceiros/Abracaf_150x150.png";
+                          "/images/parceiros/abracaf.svg";
                       }}
                     />
                   </div>
@@ -358,7 +358,7 @@ export const CorporateSection: React.FC = () => {
                   {/* Logo Card 2: Camara Municipal de Embu das Artes */}
                   <div className="corporate__partner-card">
                     <img
-                      src="/images/parceiros/camara-embu.svg"
+                      src="/images/parceiros/camara-municipal-embu.webp"
                       alt="Câmara Municipal de Embu das Artes"
                       loading="lazy"
                       decoding="async"
@@ -371,7 +371,7 @@ export const CorporateSection: React.FC = () => {
                       }}
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src =
-                          "/images/parceiros/camara-municipal-embu.webp";
+                          "/images/parceiros/camara-municipal-embu.png";
                       }}
                     />
                   </div>
