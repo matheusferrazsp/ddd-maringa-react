@@ -17,6 +17,7 @@
   display: flex;
   align-items: center;
   box-shadow: 0 2px 12px rgba(15, 23, 42, 0.03);
+  overflow: visible !important;
 }
 
 .navbar--scrolled {
@@ -33,6 +34,7 @@
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
+  overflow: visible !important;
 }
 
 /* Brand Logo */
@@ -44,17 +46,19 @@
   z-index: 99992 !important;
   flex-shrink: 0;
   justify-self: start;
+  overflow: visible !important;
 }
 
 .navbar__logo-img {
-  height: 72px;
+  height: 64px;
+  max-height: calc(100% - 6px);
   width: auto;
   object-fit: contain;
   transition: all 0.3s ease;
 }
 
 .navbar__logo-img.scrolled {
-  height: 58px;
+  height: 54px;
 }
 
 .navbar__logo-icon-wrapper {
@@ -123,6 +127,7 @@
   gap: 1.35rem;
   margin: 0 auto;
   justify-self: center;
+  overflow: visible !important;
 }
 
 .navbar__nav-link {
@@ -138,7 +143,7 @@
 }
 
 .navbar__nav-link:hover {
-  color: #00a8ff;
+  color: var(--accent-cyan);
 }
 
 .navbar__nav-link::after {
@@ -148,13 +153,37 @@
   left: 0;
   width: 0%;
   height: 2px;
-  background-color: #00a8ff;
+  background-color: var(--accent-cyan);
   transition: width 0.3s ease;
   border-radius: 2px;
 }
 
 .navbar__nav-link:hover::after {
   width: 100%;
+}
+
+.navbar__nav-link--b2b {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0284c7 !important;
+  text-decoration: none;
+  transition: all 0.22s ease;
+  padding: 0.3rem 0.75rem !important;
+  border-radius: var(--radius-sm);
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.28);
+  white-space: nowrap;
+}
+
+.navbar__nav-link--b2b:hover {
+  background: rgba(2, 132, 199, 0.15);
+  border-color: var(--accent-cyan);
+  transform: translateY(-1px);
+}
+
+.navbar__nav-link--b2b::after {
+  display: none !important;
 }
 
 /* Actions Right */
@@ -164,6 +193,7 @@
   gap: 0.75rem;
   flex-shrink: 0;
   justify-self: end;
+  overflow: visible !important;
 }
 
 .navbar__phone {
@@ -175,26 +205,25 @@
   font-weight: 600;
   font-size: 0.82rem;
   padding: 0.45rem 0.85rem;
-  border-radius: 0.55rem;
+  border-radius: var(--radius-sm);
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  transition: all 0.25s ease;
+  transition: all 0.22s ease;
   white-space: nowrap;
 }
 
 .navbar__phone:hover {
   border-color: #0284c7;
   color: #0284c7;
-  background: rgba(2, 132, 199, 0.05);
+  background: rgba(2, 132, 199, 0.06);
 }
 
 .navbar__cta-btn {
   padding: 0.52rem 1.05rem !important;
   font-size: 0.82rem !important;
   min-height: 38px !important;
-  border-radius: 0.55rem !important;
+  border-radius: var(--radius-sm) !important;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
 }
 
 /* Mobile Toggle */

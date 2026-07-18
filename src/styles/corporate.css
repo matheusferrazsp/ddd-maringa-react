@@ -22,16 +22,17 @@
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.55rem 1.35rem;
-  border-radius: 9999px;
-  background: rgba(0, 168, 255, 0.1);
-  border: 1px solid rgba(0, 168, 255, 0.3);
-  color: #0082c8;
-  font-size: 0.85rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-size: 0.81rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   margin-bottom: 1.5rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .corporate__title {
@@ -59,29 +60,30 @@
 
 .corporate__cert-card {
   padding: 1.35rem;
-  background: #f8fafc;
+  background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 1.25rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  border-radius: var(--radius-md);
+  transition: all 0.22s ease;
+  box-shadow: var(--shadow-tech);
 }
 
 .corporate__cert-card:hover {
-  border-color: #00a8ff;
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0, 168, 255, 0.12);
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-cyan);
 }
 
 .corporate__cert-icon {
   width: 2.75rem;
   height: 2.75rem;
-  border-radius: 0.85rem;
-  background: rgba(0, 168, 255, 0.12);
-  color: #00a8ff;
+  border-radius: var(--radius-sm);
+  background: rgba(2, 132, 199, 0.08);
+  color: var(--accent-cyan);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.85rem;
+  border: 1px solid rgba(2, 132, 199, 0.2);
 }
 
 .corporate__cert-title {
@@ -99,11 +101,11 @@
 
 /* Sectors Tabs Box */
 .corporate__sectors-box {
-  background: #f8fafc;
+  background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  border-radius: 1.75rem;
+  border-radius: var(--radius-lg);
   padding: 2.5rem;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-tech);
   position: relative;
 }
 
@@ -121,7 +123,7 @@
 
 .corporate__sectors-subtitle {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   margin-top: 0.25rem;
 }
 
@@ -133,43 +135,45 @@
 }
 
 .corporate__tab-btn {
-  padding: 0.65rem 1.25rem;
-  border-radius: 0.85rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: var(--radius-sm);
   background: #ffffff;
   border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
   font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.22s ease;
 }
 
 .corporate__tab-btn:hover {
-  border-color: #00a8ff;
-  color: #00a8ff;
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
 }
 
 .corporate__tab-btn.active {
-  background: #00a8ff;
+  background: var(--accent-cyan);
   color: #ffffff;
   font-weight: 700;
-  border-color: #00a8ff;
-  box-shadow: 0 4px 18px rgba(0, 168, 255, 0.3);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
 }
 
 .corporate__sector-content {
   background: #ffffff;
   border: 1px solid var(--border-subtle);
-  border-radius: 1.25rem;
+  border-radius: var(--radius-md);
   padding: 1.75rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-tech);
 }
 
 .corporate__sector-heading {
   font-size: 1.2rem;
   font-weight: 800;
-  color: #00a8ff;
+  color: var(--accent-cyan);
   margin-bottom: 0.6rem;
   display: flex;
   align-items: center;
@@ -201,11 +205,12 @@
 }
 
 .corporate__check-icon {
-  width: 1.35rem;
-  height: 1.35rem;
-  border-radius: 50%;
-  background: rgba(0, 168, 255, 0.12);
-  color: #00a8ff;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: var(--radius-sm);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--accent-emerald-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,10 +221,10 @@
 .corporate__partners-box {
   margin-top: 4.5rem;
   padding: 3rem 2rem;
-  background: #f8fafc;
-  border-radius: 1.75rem;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+  box-shadow: var(--shadow-tech);
   overflow: hidden;
   width: 100%;
   max-width: 100%;
@@ -232,9 +237,9 @@
   justify-content: center;
   background: #ffffff;
   padding: 1.5rem 3.5rem;
-  border-radius: 1.25rem;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+  box-shadow: var(--shadow-tech);
   min-width: 240px;
   height: 115px;
   box-sizing: border-box;

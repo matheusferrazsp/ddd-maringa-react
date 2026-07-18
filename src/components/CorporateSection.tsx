@@ -91,22 +91,19 @@ export const CorporateSection: React.FC = () => {
           {/* Left Column: Institutional & Legal Trust */}
           <div>
             <div className="corporate__badge">
-              <Building2 className="w-4 h-4" />
-              <span>Atendimento B2B & Pessoas Jurídicas</span>
+              <Building2 className="w-4 h-4" style={{ color: "var(--accent-cyan)" }} />
+              <span>Atendimento para Empresas e Condomínios</span>
             </div>
 
             <h2 className="corporate__title">
               Soluções Corporativas com{" "}
-              <span style={{ color: "#00a8ff" }}>
+              <span style={{ color: "var(--accent-cyan)" }}>
                 Conformidade Legal & ANVISA
               </span>
             </h2>
 
             <p className="corporate__desc">
-              Atendemos condomínios, indústrias, comércios, escolas e hospitais
-              na Grande São Paulo com **Controle Integrado de Pragas (MIP)**,
-              emissão de laudos técnicos para auditorias e flexibilidade total
-              de horários e faturamento.
+              Atendemos condomínios, indústrias, comércios, escolas e hospitais na Grande São Paulo com Controle Integrado de Pragas, emissão de laudos técnicos para auditorias e flexibilidade total de horários e faturamento.
             </p>
 
             <div ref={certsRef} className="corporate__certs">
@@ -115,24 +112,10 @@ export const CorporateSection: React.FC = () => {
                   <FileText className="w-6 h-6" />
                 </div>
                 <h4 className="corporate__cert-title">
-                  Laudo com ART e ANVISA
+                  Laudo Técnico com ART e ANVISA
                 </h4>
                 <p className="corporate__cert-desc">
-                  Emissão completa de Certificado de Garantia, FISPQ e
-                  documentação para fiscalização (CVS 09).
-                </p>
-              </div>
-
-              <div className="corporate__cert-card">
-                <div className="corporate__cert-icon">
-                  <Briefcase className="w-6 h-6" />
-                </div>
-                <h4 className="corporate__cert-title">
-                  Contratos de Controle (MIP)
-                </h4>
-                <p className="corporate__cert-desc">
-                  Manutenção mensal ou bimestral programada para blindar o
-                  estabelecimento o ano inteiro.
+                  Emissão completa de Certificado de Garantia, FISPQ dos produtos e documentação para fiscalização (CVS 09 e ANVISA).
                 </p>
               </div>
 
@@ -141,11 +124,22 @@ export const CorporateSection: React.FC = () => {
                   <Clock className="w-6 h-6" />
                 </div>
                 <h4 className="corporate__cert-title">
-                  Atendimento Noturno / 24h
+                  Atendimento Noturno e 24h
                 </h4>
                 <p className="corporate__cert-desc">
-                  Execução em horários alternativos ou finais de semana para não
-                  interferir na operação da empresa.
+                  Execução em horários alternativos, plantão emergencial ou fins de semana para não interferir na operação da sua empresa.
+                </p>
+              </div>
+
+              <div className="corporate__cert-card">
+                <div className="corporate__cert-icon">
+                  <Briefcase className="w-6 h-6" />
+                </div>
+                <h4 className="corporate__cert-title">
+                  Contratos de Manutenção
+                </h4>
+                <p className="corporate__cert-desc">
+                  Acompanhamento periódico mensal ou bimestral programado para blindar o estabelecimento durante todo o ano.
                 </p>
               </div>
 
@@ -155,8 +149,7 @@ export const CorporateSection: React.FC = () => {
                 </div>
                 <h4 className="corporate__cert-title">Faturamento para CNPJ</h4>
                 <p className="corporate__cert-desc">
-                  Condições de pagamento customizadas por boleto ou nota fiscal
-                  para administradoras e empresas.
+                  Condições de pagamento facilitadas por boleto bancário ou nota fiscal para administradoras e empresas.
                 </p>
               </div>
             </div>
@@ -270,7 +263,7 @@ export const CorporateSection: React.FC = () => {
                 marginBottom: "0.4rem",
               }}
             >
-              Autoridade & Confiança Institucional
+              Reconhecimento & Confiança
             </span>
             <h3
               style={{
@@ -280,7 +273,7 @@ export const CorporateSection: React.FC = () => {
                 color: "var(--text-primary)",
               }}
             >
-              Clientes & Órgãos Públicos que Confiam em Nossos Protocolos
+              Empresas e Órgãos Públicos que Confiam em Nosso Trabalho
             </h3>
           </div>
 

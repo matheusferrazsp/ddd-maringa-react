@@ -118,8 +118,7 @@ export const Navbar: React.FC = () => {
             </a>
             <a
               href="#empresas"
-              className="navbar__nav-link"
-              style={{ color: "#00a8ff", fontWeight: 700 }}
+              className="navbar__nav-link--b2b"
             >
               Empresas (PJ)
             </a>
@@ -137,7 +136,7 @@ export const Navbar: React.FC = () => {
           {/* Desktop CTA Buttons - Sleek & Spacious */}
           <div className="navbar__actions">
             <a href="tel:11940724379" className="navbar__phone">
-              <Phone className="w-4 h-4" style={{ color: "#00a8ff" }} />
+              <Phone className="w-4 h-4" style={{ color: "#0284c7" }} />
               <span>(11) 94072-4379</span>
             </a>
 

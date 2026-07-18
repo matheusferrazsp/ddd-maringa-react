@@ -77,7 +77,7 @@ export const HeroSection: React.FC = () => {
           <div className="hero__content hero-animate-slide-up">
             {/* Badge */}
             <div className="hero__badge">
-              <Sparkles className="w-4 h-4 flex-shrink-0" />
+              <Sparkles className="w-4 h-4 flex-shrink-0" style={{ color: "#0284c7" }} />
               <span className="hero__badge-text">
                 Plantão 24h em São Paulo e Região
               </span>
@@ -108,7 +108,7 @@ export const HeroSection: React.FC = () => {
 
             {/* Subtitle */}
             <p className="hero__subtitle">
-              Atendimento rápido e certificado em toda Grande São Paulo. Soluções seguras com laudo técnico e garantia real para residências e empresas.
+              Atendimento rápido e certificado em toda Grande São Paulo. Soluções seguras de dedetização e desentupimento com laudo técnico ANVISA e garantia real para residências e empresas.
             </p>
 
             {/* CTA Buttons */}
@@ -165,25 +165,10 @@ export const HeroSection: React.FC = () => {
                 color: "#0284c7",
               }}
             >
-              <Award className="w-4 h-4" />
-              <span className="hero__stat-num">+6 Anos</span>
-            </div>
-            <span className="hero__stat-label">Experiência consolidada</span>
-          </div>
-
-          <div className="hero__stat-card">
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.4rem",
-                color: "#0284c7",
-              }}
-            >
               <Clock className="w-4 h-4" />
               <span className="hero__stat-num">Plantão 24h</span>
             </div>
-            <span className="hero__stat-label">Atendimento imediato</span>
+            <span className="hero__stat-label">Atendimento imediato em SP</span>
           </div>
 
           <div className="hero__stat-card">
@@ -196,9 +181,24 @@ export const HeroSection: React.FC = () => {
               }}
             >
               <ShieldAlert className="w-4 h-4" />
-              <span className="hero__stat-num">100% Seguro</span>
+              <span className="hero__stat-num">Laudo ANVISA</span>
             </div>
-            <span className="hero__stat-label">Produtos certificados</span>
+            <span className="hero__stat-label">Certificado e garantia legal</span>
+          </div>
+
+          <div className="hero__stat-card">
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.4rem",
+                color: "#0284c7",
+              }}
+            >
+              <Award className="w-4 h-4" />
+              <span className="hero__stat-num">Frota Própria</span>
+            </div>
+            <span className="hero__stat-label">Equipamentos modernos e seguros</span>
           </div>
 
           <div className="hero__stat-card">
@@ -213,7 +213,7 @@ export const HeroSection: React.FC = () => {
               <MapPin className="w-4 h-4" />
               <span className="hero__stat-num">Grande SP</span>
             </div>
-            <span className="hero__stat-label">Equipes em toda região</span>
+            <span className="hero__stat-label">Equipes em todas as regiões</span>
           </div>
         </div>
       </div>

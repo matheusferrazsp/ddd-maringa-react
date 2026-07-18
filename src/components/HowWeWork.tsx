@@ -41,22 +41,22 @@ export const HowWeWork: React.FC = () => {
       step: "01",
       title: "Agendamento e Visita Imediata",
       description:
-        "Agendamos a visita técnica sem compromisso no local desejado (residência, condomínio ou empresa). Nossos técnicos avaliam a gravidade e passam o orçamento transparente na hora.",
-      icon: <ClipboardCheck className="w-8 h-8" style={{ color: "#00a8ff" }} />,
+        "Agendamos a visita sem compromisso no local desejado (residência, condomínio ou empresa). Nossos técnicos avaliam a situação e passam o orçamento transparente na hora.",
+      icon: <ClipboardCheck className="w-8 h-8" style={{ color: "var(--accent-cyan)" }} />,
     },
     {
       step: "02",
-      title: "Aplicação Especializada e Segura",
+      title: "Aplicação Segura e Eficiente",
       description:
-        "Com expertise e abordagens inovadoras, realizamos o controle de pragas ou desentupimento com equipamentos rotativos de alta tecnologia e produtos especializados de nível profissional e sanitário.",
-      icon: <ShieldAlert className="w-8 h-8" style={{ color: "#00a8ff" }} />,
+        "Realizamos o controle de pragas ou desentupimento com equipamentos modernos e produtos autorizados, sem cheiro forte, sem quebrar pisos e com total segurança.",
+      icon: <ShieldAlert className="w-8 h-8" style={{ color: "var(--accent-cyan)" }} />,
     },
     {
       step: "03",
       title: "Prevenção, Laudo e Garantia",
       description:
-        "Entregamos laudo técnico e certificado de garantia legal. Com enfoque preventivo, orientamos sobre como blindar o ambiente para evitar novas infestações ou entupimentos no futuro.",
-      icon: <Sparkles className="w-8 h-8" style={{ color: "#22c55e" }} />,
+        "Entregamos laudo técnico e certificado de garantia legal. Orientamos sobre medidas preventivas para manter o ambiente protegido contra novos entupimentos ou infestações.",
+      icon: <Sparkles className="w-8 h-8" style={{ color: "var(--accent-emerald)" }} />,
     },
   ];
 
@@ -66,11 +66,10 @@ export const HowWeWork: React.FC = () => {
         <div className="section-header">
           <span className="section-tag">Nossa Metodologia & Abordagem</span>
           <h2 className="section-title">
-            Saiba Como <span style={{ color: "#00a8ff" }}>Trabalhamos</span>
+            Saiba Como <span style={{ color: "var(--accent-cyan)" }}>Trabalhamos</span>
           </h2>
           <p className="section-subtitle">
-            Um processo simples, ágil e certificado para devolver o sossego e a
-            segurança ao seu imóvel em tempo recorde.
+            Um processo simples, ágil e certificado para resolver o problema e garantir a tranquilidade do seu imóvel.
           </p>
         </div>
 
@@ -93,14 +92,14 @@ export const HowWeWork: React.FC = () => {
         <div
           style={{
             marginTop: "4.5rem",
-            background: "#ffffff",
-            borderRadius: "1.75rem",
+            background: "var(--bg-card)",
+            borderRadius: "var(--radius-lg)",
             border: "1px solid var(--border-subtle)",
             overflow: "hidden",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
             alignItems: "center",
-            boxShadow: "0 15px 35px rgba(15, 23, 42, 0.04)",
+            boxShadow: "var(--shadow-tech)",
           }}
         >
           <div
@@ -129,11 +128,12 @@ export const HowWeWork: React.FC = () => {
           <div style={{ padding: "2.75rem" }}>
             <span
               style={{
+                fontFamily: "var(--font-heading)",
                 fontSize: "0.78rem",
-                fontWeight: 800,
-                color: "#0082c8",
+                fontWeight: 700,
+                color: "var(--accent-cyan-dark)",
                 textTransform: "uppercase",
-                letterSpacing: "0.08em",
+                letterSpacing: "0.06em",
                 display: "flex",
                 alignItems: "center",
                 gap: "0.4rem",
@@ -142,9 +142,9 @@ export const HowWeWork: React.FC = () => {
             >
               <span
                 className="pulse-dot"
-                style={{ backgroundColor: "#22c55e" }}
+                style={{ backgroundColor: "var(--accent-emerald)" }}
               ></span>{" "}
-              Precisão & Tecnologia de Campo
+              Qualidade & Eficiência no Atendimento
             </span>
             <h3
               style={{
@@ -155,30 +155,25 @@ export const HowWeWork: React.FC = () => {
                 marginBottom: "1rem",
               }}
             >
-              Tecnologia de Pulverização Avançada & Proteção Ambiental
+              Pulverização Profissional & Cuidado com a sua Saúde
             </h3>
             <p
               style={{
                 color: "var(--text-secondary)",
-                fontSize: "0.92rem",
+                fontSize: "0.94rem",
                 lineHeight: 1.65,
                 marginBottom: "1.5rem",
               }}
             >
-              Utilizamos nebulizadores costais motorizados e atomizadores de
-              alta precisão que distribuem micropartículas nos focos exatos das
-              infestações. Nossos protocolos garantem eficácia máxima contra
-              mosquitos e pragas urbanas, preservando totalmente a vegetação,
-              jardins e garantindo retorno rápido para famílias e animais
-              domésticos.
+              Utilizamos equipamentos modernos e silenciosos que aplicam o produto diretamente nos focos dos problemas. Nossos métodos garantem máxima eficiência contra pragas, preservando plantas, jardins e garantindo retorno rápido e seguro para sua família e animais de estimação.
             </p>
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
               <span
                 style={{
-                  background: "#f8fafc",
+                  background: "var(--bg-secondary)",
                   border: "1px solid var(--border-subtle)",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "9999px",
+                  padding: "0.45rem 0.85rem",
+                  borderRadius: "var(--radius-sm)",
                   fontSize: "0.82rem",
                   fontWeight: 700,
                   color: "var(--text-primary)",
@@ -188,16 +183,16 @@ export const HowWeWork: React.FC = () => {
               </span>
               <span
                 style={{
-                  background: "#f8fafc",
+                  background: "var(--bg-secondary)",
                   border: "1px solid var(--border-subtle)",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "9999px",
+                  padding: "0.45rem 0.85rem",
+                  borderRadius: "var(--radius-sm)",
                   fontSize: "0.82rem",
                   fontWeight: 700,
                   color: "var(--text-primary)",
                 }}
               >
-                🌿 Seguro p/ Jardins e Piscinas
+                🌿 Seguro para Crianças e Animais
               </span>
             </div>
           </div>
