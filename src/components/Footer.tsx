@@ -173,7 +173,11 @@ export const Footer: React.FC = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <img src="/images/logos/whatsapp-white.svg" alt="WhatsApp" className="w-4 h-4 flex-shrink-0 object-contain" />
+                  <img
+                    src="/images/logos/whatsapp-white.svg"
+                    alt="WhatsApp"
+                    className="w-4 h-4 flex-shrink-0 object-contain"
+                  />
                   <span>Atendimento WhatsApp</span>
                 </a>
               </li>
@@ -191,7 +195,7 @@ export const Footer: React.FC = () => {
               <a
                 className="w-4 h-4 text-cyan-500 fill-cyan-500"
                 style={{ color: "#00a8ff", fill: "#00a8ff" }}
-                href="https://matheuferrazdev.com.br"
+                href="https://matheusferrazdev.com.br"
                 target="_blank"
                 rel="noopener noreferrer"
               >
