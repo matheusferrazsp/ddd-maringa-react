@@ -239,7 +239,28 @@ export const CorporateSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Institutional Partners Ticker / Slides without texts & without photo */}
+        {/* Premium Image Banner */}
+        <div style={{ margin: "5rem 0", position: "relative", borderRadius: "24px", overflow: "hidden", minHeight: "400px", display: "flex", alignItems: "center", padding: "4rem 3rem", boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}>
+          <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+             <img src="/images/trabalho/abracaf.jpg" alt="Serviço corporativo na ABRACAF" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }} />
+             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.2) 100%)" }}></div>
+          </div>
+          
+          <div style={{ position: "relative", zIndex: 1, maxWidth: "600px" }}>
+            <span className="section-tag" style={{ background: "rgba(255,255,255,0.15)", color: "#fff", borderColor: "rgba(255,255,255,0.3)", marginBottom: "1.5rem" }}>Atuação Corporativa</span>
+            <h3 style={{ fontSize: "2.5rem", fontWeight: 800, color: "#fff", marginBottom: "1rem", fontFamily: "var(--font-heading)" }}>
+              Preparados para Grandes Desafios
+            </h3>
+            <p style={{ color: "rgba(255,255,255,0.9)", fontSize: "1.1rem", lineHeight: 1.6, marginBottom: "2rem" }}>
+              Nossas equipes são treinadas para atuar em ambientes de alta exigência corporativa, garantindo total discrição, proteção do patrimônio e máxima eficácia no controle de pragas.
+            </p>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn" style={{ backgroundColor: "#fff", color: "#0f172a" }}>
+               Agendar Visita Técnica
+            </a>
+          </div>
+        </div>
+
+        {/* Institutional Partners Ticker / Slides sem textos & sem foto */}
         <div className="corporate__partners-box">
           <style>{`
             @keyframes corporate-ticker {
