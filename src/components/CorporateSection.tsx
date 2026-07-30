@@ -82,7 +82,8 @@ export const CorporateSection: React.FC = () => {
   const certsRef = useRef<HTMLDivElement>(null);
   useAutoScrollCarousel(certsRef, 4200);
 
-  const whatsappUrl = "https://wa.me/+5511940724379?text=Ol%C3%A1%2C%20represento%20uma%20empresa%2Fcondom%C3%ADnio%20%28CNPJ%29%20e%20gostaria%20de%20solicitar%20uma%20proposta%20ou%20agendar%20visita%20t%C3%A9cnica.";
+  const whatsappUrl =
+    "https://wa.me/+5511940724379?text=Ol%C3%A1%2C%20represento%20uma%20empresa%2Fcondom%C3%ADnio%20%28CNPJ%29%20e%20gostaria%20de%20solicitar%20uma%20proposta%20ou%20agendar%20visita%20t%C3%A9cnica.";
 
   return (
     <section id="empresas" className="corporate-section">
@@ -91,7 +92,10 @@ export const CorporateSection: React.FC = () => {
           {/* Left Column: Institutional & Legal Trust */}
           <div>
             <div className="corporate__badge">
-              <Building2 className="w-4 h-4" style={{ color: "var(--accent-cyan)" }} />
+              <Building2
+                className="w-4 h-4"
+                style={{ color: "var(--accent-cyan)" }}
+              />
               <span>Atendimento para Empresas e Condomínios</span>
             </div>
 
@@ -103,7 +107,10 @@ export const CorporateSection: React.FC = () => {
             </h2>
 
             <p className="corporate__desc">
-              Atendemos condomínios, indústrias, comércios, escolas e hospitais na Grande São Paulo com Controle Integrado de Pragas, emissão de laudos técnicos para auditorias e flexibilidade total de horários e faturamento.
+              Atendemos condomínios, indústrias, comércios, escolas e hospitais
+              na Grande São Paulo com Controle Integrado de Pragas, emissão de
+              laudos técnicos para auditorias e flexibilidade total de horários
+              e faturamento.
             </p>
 
             <div ref={certsRef} className="corporate__certs">
@@ -115,7 +122,8 @@ export const CorporateSection: React.FC = () => {
                   Laudo Técnico com ART e ANVISA
                 </h4>
                 <p className="corporate__cert-desc">
-                  Emissão completa de Certificado de Garantia, FISPQ dos produtos e documentação para fiscalização (CVS 09 e ANVISA).
+                  Emissão completa de Certificado de Garantia, FISPQ dos
+                  produtos e documentação para fiscalização (CVS 09 e ANVISA).
                 </p>
               </div>
 
@@ -127,7 +135,8 @@ export const CorporateSection: React.FC = () => {
                   Atendimento Noturno e 24h
                 </h4>
                 <p className="corporate__cert-desc">
-                  Execução em horários alternativos, plantão emergencial ou fins de semana para não interferir na operação da sua empresa.
+                  Execução em horários alternativos, plantão emergencial ou fins
+                  de semana para não interferir na operação da sua empresa.
                 </p>
               </div>
 
@@ -139,7 +148,8 @@ export const CorporateSection: React.FC = () => {
                   Contratos de Manutenção
                 </h4>
                 <p className="corporate__cert-desc">
-                  Acompanhamento periódico mensal ou bimestral programado para blindar o estabelecimento durante todo o ano.
+                  Acompanhamento periódico mensal ou bimestral programado para
+                  blindar o estabelecimento durante todo o ano.
                 </p>
               </div>
 
@@ -149,7 +159,8 @@ export const CorporateSection: React.FC = () => {
                 </div>
                 <h4 className="corporate__cert-title">Faturamento para CNPJ</h4>
                 <p className="corporate__cert-desc">
-                  Condições de pagamento facilitadas por boleto bancário ou nota fiscal para administradoras e empresas.
+                  Condições de pagamento facilitadas por boleto bancário ou nota
+                  fiscal para administradoras e empresas.
                 </p>
               </div>
             </div>
@@ -160,7 +171,11 @@ export const CorporateSection: React.FC = () => {
               rel="noopener noreferrer"
               className="btn btn-cyan"
             >
-              <img src="/images/logos/whatsapp-white.svg" alt="WhatsApp" className="w-4 h-4 flex-shrink-0 object-contain" />
+              <img
+                src="/images/logos/whatsapp-white.svg"
+                alt="WhatsApp"
+                className="w-4 h-4 flex-shrink-0 object-contain"
+              />
               <span>Orçamento para Empresas (PJ)</span>
               <ArrowRight className="w-4 h-4" />
             </a>
@@ -240,22 +255,83 @@ export const CorporateSection: React.FC = () => {
         </div>
 
         {/* Premium Image Banner */}
-        <div style={{ margin: "5rem 0", position: "relative", borderRadius: "24px", overflow: "hidden", minHeight: "400px", display: "flex", alignItems: "center", padding: "4rem 3rem", boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}>
+        <div
+          style={{
+            margin: "5rem 0",
+            position: "relative",
+            borderRadius: "24px",
+            overflow: "hidden",
+            minHeight: "400px",
+            display: "flex",
+            alignItems: "center",
+            padding: "4rem 3rem",
+            boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+          }}
+        >
           <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-             <img src="/images/trabalho/abracaf.jpg" alt="Serviço corporativo na ABRACAF" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%" }} />
-             <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.2) 100%)" }}></div>
+            <img
+              src="/images/trabalho/abracaf.jpg"
+              alt="Serviço corporativo na ABRACAF"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center 30%",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.2) 100%)",
+              }}
+            ></div>
           </div>
-          
+
           <div style={{ position: "relative", zIndex: 1, maxWidth: "600px" }}>
-            <span className="section-tag" style={{ background: "rgba(255,255,255,0.15)", color: "#fff", borderColor: "rgba(255,255,255,0.3)", marginBottom: "1.5rem" }}>Atuação Corporativa</span>
-            <h3 style={{ fontSize: "2.5rem", fontWeight: 800, color: "#fff", marginBottom: "1rem", fontFamily: "var(--font-heading)" }}>
+            <span
+              className="section-tag"
+              style={{
+                background: "rgba(255,255,255,0.15)",
+                color: "#fff",
+                borderColor: "rgba(255,255,255,0.3)",
+                marginBottom: "1.5rem",
+              }}
+            >
+              Atuação Corporativa
+            </span>
+            <h3
+              style={{
+                fontSize: "2.5rem",
+                fontWeight: 800,
+                color: "#fff",
+                marginBottom: "1rem",
+                fontFamily: "var(--font-heading)",
+              }}
+            >
               Preparados para Grandes Desafios
             </h3>
-            <p style={{ color: "rgba(255,255,255,0.9)", fontSize: "1.1rem", lineHeight: 1.6, marginBottom: "2rem" }}>
-              Nossas equipes são treinadas para atuar em ambientes de alta exigência corporativa, garantindo total discrição, proteção do patrimônio e máxima eficácia no controle de pragas.
+            <p
+              style={{
+                color: "rgba(255,255,255,0.9)",
+                fontSize: "1.1rem",
+                lineHeight: 1.6,
+                marginBottom: "2rem",
+              }}
+            >
+              Nossas equipes são treinadas para atuar em ambientes de alta
+              exigência corporativa, garantindo total discrição, proteção do
+              patrimônio e máxima eficácia no controle de pragas.
             </p>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn" style={{ backgroundColor: "#fff", color: "#0f172a" }}>
-               Agendar Visita Técnica
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn"
+              style={{ backgroundColor: "#fff", color: "#0f172a" }}
+            >
+              Agendar Visita Técnica
             </a>
           </div>
         </div>
@@ -356,10 +432,10 @@ export const CorporateSection: React.FC = () => {
                       loading="lazy"
                       decoding="async"
                       width="150"
-                      height="70"
+                      height="150"
                       style={{
-                        maxHeight: "72px",
-                        maxWidth: "170px",
+                        maxHeight: "150px",
+                        maxWidth: "150px",
                         objectFit: "contain",
                       }}
                       onError={(e) => {
@@ -376,11 +452,11 @@ export const CorporateSection: React.FC = () => {
                       alt="Câmara Municipal de Embu das Artes"
                       loading="lazy"
                       decoding="async"
-                      width="180"
-                      height="75"
+                      width="150"
+                      height="150"
                       style={{
-                        maxHeight: "78px",
-                        maxWidth: "180px",
+                        maxHeight: "150px",
+                        maxWidth: "150px",
                         objectFit: "contain",
                       }}
                       onError={(e) => {
