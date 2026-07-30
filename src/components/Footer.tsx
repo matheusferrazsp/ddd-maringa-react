@@ -1,5 +1,6 @@
 import React from "react";
 import { Phone, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Footer: React.FC = () => {
   const whatsappUrl =
@@ -12,12 +13,12 @@ export const Footer: React.FC = () => {
           {/* Brand Info */}
           <div>
             <div
-              style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}
+              style={{ display: "flex", justifyContent: "flex-start", marginLeft: "-0.5rem", marginBottom: "1rem" }}
             >
               <img
                 src="/images/logos/logo.webp"
                 alt="Dedetizadora Maringá"
-                style={{ height: "84px", width: "auto", objectFit: "contain" }}
+                style={{ height: "84px", width: "auto", objectFit: "contain", objectPosition: "left" }}
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src =
                     "/images/logos/logo.png";
@@ -63,34 +64,29 @@ export const Footer: React.FC = () => {
             <h4 className="footer__heading">Navegação</h4>
             <ul className="footer__nav-list">
               <li>
-                <a href="#inicio" className="footer__nav-link">
+                <Link to="/" className="footer__nav-link">
                   Início
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#servicos" className="footer__nav-link">
+                <Link to="/sobre" className="footer__nav-link">
+                  Sobre Nós
+                </Link>
+              </li>
+              <li>
+                <Link to="/servicos" className="footer__nav-link">
                   Nossos Serviços
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#empresas" className="footer__nav-link">
+                <Link to="/empresas" className="footer__nav-link">
                   Para Empresas (PJ)
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#metodologia" className="footer__nav-link">
-                  Abordagem & Metodologia
-                </a>
-              </li>
-              <li>
-                <a href="#depoimentos" className="footer__nav-link">
-                  Avaliações de Clientes
-                </a>
-              </li>
-              <li>
-                <a href="#contato" className="footer__nav-link">
+                <Link to="/contato" className="footer__nav-link">
                   Fale Conosco
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

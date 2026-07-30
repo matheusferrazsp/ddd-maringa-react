@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Phone, Menu, X, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -50,22 +51,21 @@ export const Navbar: React.FC = () => {
       {/* Drawer Nav Links */}
       <nav className="navbar__mobile-nav">
         {[
-          { href: "#inicio", label: "Início" },
-          { href: "#servicos", label: "Nossos Serviços" },
-          { href: "#empresas", label: "Para Empresas (PJ)", highlight: true },
-          { href: "#metodologia", label: "Nossa Abordagem" },
-          { href: "#depoimentos", label: "Avaliações & Clientes" },
-          { href: "#contato", label: "Fale Conosco / Contato" },
+          { href: "/", label: "Início" },
+          { href: "/sobre", label: "Sobre Nós" },
+          { href: "/servicos", label: "Nossos Serviços" },
+          { href: "/empresas", label: "Para Empresas (PJ)", highlight: true },
+          { href: "/contato", label: "Fale Conosco / Contato" },
         ].map((item) => (
-          <a
+          <Link
             key={item.href}
-            href={item.href}
+            to={item.href}
             onClick={() => setMobileMenuOpen(false)}
             className={`navbar__mobile-link-card ${item.highlight ? "highlight" : ""}`}
           >
             <span>{item.label}</span>
             <ChevronRight className="w-5 h-5 text-slate-400" />
-          </a>
+          </Link>
         ))}
       </nav>
 
@@ -99,38 +99,35 @@ export const Navbar: React.FC = () => {
       <header className={`navbar ${scrolled ? "navbar--scrolled" : ""}`}>
         <div className="navbar__container">
           {/* Logo */}
-          <a href="#" className="navbar__logo">
+          <Link to="/" className="navbar__logo">
             <img 
               src="/images/logos/logo.webp" 
               alt="Dedetizadora Maringá" 
               className={`navbar__logo-img ${scrolled ? 'scrolled' : ''}`}
               onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/logos/logo.png'; }}
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation Links - Compact & Non-Wrapping */}
           <nav className="navbar__nav">
-            <a href="#inicio" className="navbar__nav-link">
+            <Link to="/" className="navbar__nav-link">
               Início
-            </a>
-            <a href="#servicos" className="navbar__nav-link">
+            </Link>
+            <Link to="/sobre" className="navbar__nav-link">
+              Sobre Nós
+            </Link>
+            <Link to="/servicos" className="navbar__nav-link">
               Serviços
-            </a>
-            <a
-              href="#empresas"
+            </Link>
+            <Link
+              to="/empresas"
               className="navbar__nav-link--b2b"
             >
               Empresas (PJ)
-            </a>
-            <a href="#metodologia" className="navbar__nav-link">
-              Abordagem
-            </a>
-            <a href="#depoimentos" className="navbar__nav-link">
-              Avaliações
-            </a>
-            <a href="#contato" className="navbar__nav-link">
+            </Link>
+            <Link to="/contato" className="navbar__nav-link">
               Contato
-            </a>
+            </Link>
           </nav>
 
           {/* Desktop CTA Buttons - Sleek & Spacious */}
