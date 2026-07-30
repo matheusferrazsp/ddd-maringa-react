@@ -23,9 +23,9 @@ export const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-white text-slate-900 relative overflow-x-clip w-full max-w-full">
+      <div className="min-h-screen flex flex-col bg-white text-slate-900 relative overflow-x-hidden w-full max-w-full">
         <Navbar />
-        <main className="flex-grow overflow-x-clip w-full max-w-full">
+        <main className="flex-grow overflow-x-hidden w-full max-w-full">
           <Suspense fallback={<div className="min-h-[300px]" />}>
             <Routes>
               <Route path="/" element={<HomePage />} />
