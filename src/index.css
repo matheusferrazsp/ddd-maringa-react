@@ -58,7 +58,7 @@
 }
 
 html, body, #root, main, section, footer, article, aside, .app, .section-padding, .testimonials-section, .services-section, .corporate-section, .contact, .hero, .parallax-banner, .how-we-work {
-  overflow-x: hidden !important;
+  overflow-x: clip !important;
   max-width: 100vw !important;
   position: relative;
   box-sizing: border-box;

@@ -7,15 +7,22 @@
   padding: 6.5rem 0;
   background-color: #ffffff;
   border-bottom: 1px solid var(--border-subtle);
-  overflow: hidden;
 }
 
 .corporate__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center;
+  align-items: start;
   margin-top: 3rem;
+}
+.corporate__sticky-col {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  height: max-content;
+  z-index: 10;
 }
 
 .corporate__badge {
