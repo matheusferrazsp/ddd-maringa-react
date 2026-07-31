@@ -33,11 +33,14 @@ export const Navbar: React.FC = () => {
     <div className={`navbar__mobile-drawer ${mobileMenuOpen ? "open" : ""}`}>
       {/* Drawer Header */}
       <div className="navbar__drawer-header">
-        <img 
-              src="/images/logos/logo.webp" 
-              alt="Dedetizadora Maringá" 
-              className="navbar__drawer-logo"
-              onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/logos/logo.png'; }}
+        <img
+          src="/images/logos/logo.webp"
+          alt="Dedetizadora Maringá"
+          className="navbar__drawer-logo"
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).src =
+              "/images/logos/logo.png";
+          }}
         />
         <button
           onClick={() => setMobileMenuOpen(false)}
@@ -78,8 +81,12 @@ export const Navbar: React.FC = () => {
           onClick={() => setMobileMenuOpen(false)}
           className="btn btn-emerald navbar__mobile-btn"
         >
-          <img src="/images/logos/whatsapp-white.svg" alt="WhatsApp" className="w-4 h-4 flex-shrink-0 object-contain" />
-          <span>Orçamento no WhatsApp</span>
+          <img
+            src="/images/logos/whatsapp-white.svg"
+            alt="WhatsApp"
+            className="w-4 h-4 flex-shrink-0 object-contain"
+          />
+          <span>Entre em contato</span>
         </a>
 
         <a
@@ -87,7 +94,10 @@ export const Navbar: React.FC = () => {
           onClick={() => setMobileMenuOpen(false)}
           className="btn btn-outline navbar__mobile-btn"
         >
-          <Phone className="w-5 h-5 flex-shrink-0" style={{ color: "#00a8ff" }} />
+          <Phone
+            className="w-5 h-5 flex-shrink-0"
+            style={{ color: "#00a8ff" }}
+          />
           <span>Ligar Agora: (11) 94072-4379</span>
         </a>
       </div>
@@ -100,11 +110,14 @@ export const Navbar: React.FC = () => {
         <div className="navbar__container">
           {/* Logo */}
           <Link to="/" className="navbar__logo">
-            <img 
-              src="/images/logos/logo.webp" 
-              alt="Dedetizadora Maringá" 
-              className={`navbar__logo-img ${scrolled ? 'scrolled' : ''}`}
-              onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/logos/logo.png'; }}
+            <img
+              src="/images/logos/logo.webp"
+              alt="Dedetizadora Maringá"
+              className={`navbar__logo-img ${scrolled ? "scrolled" : ""}`}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src =
+                  "/images/logos/logo.png";
+              }}
             />
           </Link>
 
@@ -119,10 +132,7 @@ export const Navbar: React.FC = () => {
             <Link to="/servicos" className="navbar__nav-link">
               Serviços
             </Link>
-            <Link
-              to="/empresas"
-              className="navbar__nav-link--b2b"
-            >
+            <Link to="/empresas" className="navbar__nav-link--b2b">
               Empresas (PJ)
             </Link>
             <Link to="/contato" className="navbar__nav-link">
@@ -143,8 +153,12 @@ export const Navbar: React.FC = () => {
               rel="noopener noreferrer"
               className="btn btn-emerald navbar__cta-btn"
             >
-              <img src="/images/logos/whatsapp-white.svg" alt="WhatsApp" className="w-4 h-4 flex-shrink-0 object-contain" />
-              <span>Orçamento</span>
+              <img
+                src="/images/logos/whatsapp-white.svg"
+                alt="WhatsApp"
+                className="w-4 h-4 flex-shrink-0 object-contain"
+              />
+              <span>Entrar em contato</span>
             </a>
           </div>
 
@@ -163,7 +177,8 @@ export const Navbar: React.FC = () => {
         </div>
       </header>
 
-      {typeof document !== "undefined" && createPortal(drawerContent, document.body)}
+      {typeof document !== "undefined" &&
+        createPortal(drawerContent, document.body)}
     </>
   );
 };

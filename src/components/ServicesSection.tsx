@@ -309,7 +309,7 @@ export const ServicesSection: React.FC = () => {
                 className="btn btn-emerald services__detail-cta"
               >
                 <img src="/images/logos/whatsapp-white.svg" alt="WhatsApp" className="w-4 h-4 flex-shrink-0 object-contain" />
-                <span>Orçamento no WhatsApp</span>
+                <span>Entrar em contato</span>
                 <ArrowUpRight className="w-4 h-4 flex-shrink-0" />
               </a>
             </div>
@@ -381,7 +381,7 @@ export const ServicesSection: React.FC = () => {
                   className="btn btn-emerald services__detail-cta"
                 >
                   <img src="/images/logos/whatsapp-white.svg" alt="WhatsApp" className="w-4 h-4 flex-shrink-0 object-contain" />
-                  <span>Orçamento</span>
+                  <span>Entrar em contato</span>
                   <ArrowUpRight className="w-4 h-4 flex-shrink-0" />
                 </a>
               </div>

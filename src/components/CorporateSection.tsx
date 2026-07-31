@@ -176,7 +176,7 @@ export const CorporateSection: React.FC = () => {
                 alt="WhatsApp"
                 className="w-4 h-4 flex-shrink-0 object-contain"
               />
-              <span>Orçamento para Empresas (PJ)</span>
+              <span>Entrar em contato</span>
               <ArrowRight className="w-4 h-4" />
             </a>
 
