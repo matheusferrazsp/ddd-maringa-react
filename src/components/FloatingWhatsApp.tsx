@@ -8,7 +8,7 @@ export const FloatingWhatsApp: React.FC = () => {
     <div className="floating-wa">
       <div className="floating-wa__tooltip">
         <span className="pulse-dot" />
-        <span>🟢 Online: Fale com um Técnico</span>
+        <span> Online: Fale com um Técnico</span>
       </div>
 
       <a

@@ -187,7 +187,10 @@ export const Footer: React.FC = () => {
         <div className="footer__bottom">
           <p>
             © {new Date().getFullYear()} Dedetizadora e Desentupidora Maringá.
-            Todos os direitos reservados.
+            Todos os direitos reservados.{" "}
+            <Link to="/politica-de-privacidade" style={{ color: "var(--text-muted)", textDecoration: "underline", marginLeft: "10px" }}>
+              Política de Privacidade
+            </Link>
           </p>
           <p style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
             <span>

@@ -7,6 +7,7 @@ const AboutPage = lazy(() => import("./pages/AboutPage").then((m) => ({ default:
 const ServicesPage = lazy(() => import("./pages/ServicesPage").then((m) => ({ default: m.ServicesPage })));
 const CorporatePage = lazy(() => import("./pages/CorporatePage").then((m) => ({ default: m.CorporatePage })));
 const ContactPage = lazy(() => import("./pages/ContactPage").then((m) => ({ default: m.ContactPage })));
+const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage").then((m) => ({ default: m.PrivacyPolicyPage })));
 
 const Footer = lazy(() => import("./components/Footer").then((m) => ({ default: m.Footer })));
 const FloatingWhatsApp = lazy(() => import("./components/FloatingWhatsApp").then((m) => ({ default: m.FloatingWhatsApp })));
@@ -33,6 +34,7 @@ export const App: React.FC = () => {
               <Route path="/servicos" element={<ServicesPage />} />
               <Route path="/empresas" element={<CorporatePage />} />
               <Route path="/contato" element={<ContactPage />} />
+              <Route path="/politica-de-privacidade" element={<PrivacyPolicyPage />} />
             </Routes>
           </Suspense>
         </main>
