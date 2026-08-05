@@ -22,8 +22,15 @@ export const CookieConsent: React.FC = () => {
     setIsVisible(false);
     setHasConsented(true);
     
-    // Aqui seria feita a integração com o Consent Mode v2 do Google Tag Manager
-    // Exemplo: window.gtag('consent', 'update', { ad_storage: type === 'all' ? 'granted' : 'denied', ... })
+    // Google Consent Mode v2 Update
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("consent", "update", {
+        ad_storage: type === "all" ? "granted" : "denied",
+        ad_user_data: type === "all" ? "granted" : "denied",
+        ad_personalization: type === "all" ? "granted" : "denied",
+        analytics_storage: type === "all" || type === "essential" ? "granted" : "denied",
+      });
+    }
   };
 
   const openBanner = () => {
