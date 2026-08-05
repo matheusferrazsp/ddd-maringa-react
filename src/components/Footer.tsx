@@ -110,6 +110,9 @@ export const Footer: React.FC = () => {
               <li className="footer__nav-link" style={{ cursor: "default" }}>
                 Percevejos e Mosquitos
               </li>
+              <li className="footer__nav-link" style={{ cursor: "default" }}>
+                Controle e Manejo de Pombos
+              </li>
             </ul>
           </div>
 

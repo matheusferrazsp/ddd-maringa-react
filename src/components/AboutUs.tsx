@@ -1,7 +1,21 @@
-import React from "react";
-import { ShieldCheck, Award, Briefcase, CheckCircle } from "lucide-react";
+import React, { useRef } from "react";
+import { ShieldCheck, Award, Briefcase, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
 
 export const AboutUs: React.FC = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
+    }
+  };
+
   return (
     <section id="sobre-nos" className="section-padding bg-secondary" style={{ backgroundColor: "var(--bg-secondary)" }}>
       <div className="container">
@@ -169,6 +183,49 @@ export const AboutUs: React.FC = () => {
             <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem", lineHeight: 1.6 }}>
               Agimos com coerência em cada etapa do processo. Fazemos o trabalho correto para resolver o seu problema.
             </p>
+          </div>
+        </div>
+
+        {/* Galeria de Credibilidade */}
+        <div style={{ marginTop: "5rem" }}>
+          <div className="section-header">
+            <h2 className="section-title">
+              Nossa Equipe <span className="gradient-text-cyan">Em Ação</span>
+            </h2>
+            <p className="section-subtitle">
+              Atendemos condomínios, empresas e residências sempre com equipamentos de ponta, discrição e total segurança.
+            </p>
+          </div>
+          <div className="carousel-container" style={{ position: "relative", marginTop: "2rem" }}>
+            <button className="carousel-btn prev-btn" onClick={scrollLeft} aria-label="Anterior">
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button className="carousel-btn next-btn" onClick={scrollRight} aria-label="Próximo">
+              <ChevronRight className="w-6 h-6" />
+            </button>
+            
+            <div ref={scrollRef} className="credibility-carousel-track">
+              <div className="credibility-image-wrapper">
+                <img src="/images/servicos/igreja.jpg" alt="Equipe realizando serviço em Igreja" loading="lazy" />
+                <div className="credibility-caption">Igrejas e Templos</div>
+              </div>
+              <div className="credibility-image-wrapper">
+                <img src="/images/servicos/area-interna.jpg" alt="Tratamento seguro em Área Interna" loading="lazy" />
+                <div className="credibility-caption">Áreas Internas Sensíveis</div>
+              </div>
+              <div className="credibility-image-wrapper">
+                <img src="/images/servicos/area-externa.webp" alt="Serviço de longa duração em Área Externa" loading="lazy" />
+                <div className="credibility-caption">Áreas Externas e Condomínios</div>
+              </div>
+              <div className="credibility-image-wrapper">
+                <img src="/images/trabalho/abracaf.jpg" alt="Atuação Corporativa" loading="lazy" />
+                <div className="credibility-caption">Atuação Corporativa</div>
+              </div>
+              <div className="credibility-image-wrapper">
+                <img src="/images/trabalho/telhado.jpg" alt="Telhados e Forros" loading="lazy" />
+                <div className="credibility-caption">Telhados e Forros</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
