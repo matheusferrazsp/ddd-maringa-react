@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
   }, [mobileMenuOpen]);
 
   const whatsappUrl =
-    "https://wa.me/+5511940724379?text=Ol%C3%A1%2C%20gostaria%20de%20receber%20um%20or%C3%A7amento%20gratuito.";
+    "https://wa.me/+5511940724379?text=Ol%C3%A1%21%20Vi%20o%20an%C3%BAncio%20e%20preciso%20de%20um%20or%C3%A7amento%20r%C3%A1pido.%20Podem%20me%20ajudar%3F";
 
   const drawerContent = (
     <div className={`navbar__mobile-drawer ${mobileMenuOpen ? "open" : ""}`}>
@@ -86,7 +86,7 @@ export const Navbar: React.FC = () => {
             alt="WhatsApp"
             className="w-4 h-4 flex-shrink-0 object-contain"
           />
-          <span>Entre em contato</span>
+          <span>Falar no WhatsApp</span>
         </a>
 
         <a
@@ -158,7 +158,7 @@ export const Navbar: React.FC = () => {
                 alt="WhatsApp"
                 className="w-4 h-4 flex-shrink-0 object-contain"
               />
-              <span>Entrar em contato</span>
+              <span>Falar no WhatsApp</span>
             </a>
           </div>
 

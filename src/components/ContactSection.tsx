@@ -19,13 +19,13 @@ export const ContactSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Olá, meu nome é *${formData.nome}*. Telefone: ${formData.telefone}. Gostaria de orçamento para: *${formData.servico}*. Mensagem: ${formData.mensagem}`;
+    const text = `Olá! Meu nome é *${formData.nome}*. Vi o site de vocês e preciso de ajuda com: *${formData.servico}*.\n\nDetalhes: ${formData.mensagem}\nMeu número: ${formData.telefone}\n\nPodem me responder rápido, por favor?`;
     const url = `https://wa.me/+5511940724379?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
   };
 
   const whatsappUrl =
-    "https://wa.me/+5511940724379?text=Ol%C3%A1%2C%20gostaria%20de%20receber%20um%20or%C3%A7amento%20gratuito.";
+    "https://wa.me/+5511940724379?text=Ol%C3%A1%21%20Vi%20o%20an%C3%BAncio%20e%20preciso%20de%20um%20or%C3%A7amento%20r%C3%A1pido.%20Podem%20me%20ajudar%3F";
 
   return (
     <section
@@ -232,7 +232,7 @@ export const ContactSection: React.FC = () => {
                     alt="WhatsApp"
                     className="w-4 h-4 flex-shrink-0 object-contain"
                   />
-                  <span>Entrar em contato</span>
+                  <span>Enviar e Chamar no WhatsApp</span>
                 </button>
               </form>
 
