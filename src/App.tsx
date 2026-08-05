@@ -11,6 +11,7 @@ const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage").then((m
 
 const Footer = lazy(() => import("./components/Footer").then((m) => ({ default: m.Footer })));
 const FloatingWhatsApp = lazy(() => import("./components/FloatingWhatsApp").then((m) => ({ default: m.FloatingWhatsApp })));
+const CookieConsent = lazy(() => import("./components/CookieConsent").then((m) => ({ default: m.CookieConsent })));
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -41,6 +42,7 @@ export const App: React.FC = () => {
         <Suspense fallback={null}>
           <Footer />
           <FloatingWhatsApp />
+          <CookieConsent />
         </Suspense>
       </div>
     </Router>

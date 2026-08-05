@@ -502,3 +502,170 @@ body {
   font-weight: 700;
   font-size: 1.1rem;
 }
+
+/* ==========================================================================
+   COOKIE CONSENT BANNER
+   ========================================================================== */
+.cookie-consent-banner {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.12), 0 1px 3px rgba(15, 23, 42, 0.05);
+  border: 1px solid var(--border-subtle);
+  z-index: 999999;
+  animation: slideUpCookie 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpCookie {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.floating-cookie-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999998;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: scaleInCookie 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.floating-cookie-toggle:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.12);
+  color: var(--accent-cyan);
+  border-color: rgba(0, 168, 255, 0.3);
+}
+
+@keyframes scaleInCookie {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.cookie-consent-content {
+  padding: 1.5rem;
+}
+
+.cookie-consent-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.cookie-icon-wrapper {
+  background: rgba(0, 168, 255, 0.1);
+  color: #00a8ff;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cookie-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin: 0;
+  flex-grow: 1;
+}
+
+.cookie-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+}
+
+.cookie-close:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.cookie-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.cookie-link {
+  color: #00a8ff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cookie-link:hover {
+  text-decoration: underline;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.cookie-btn {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.cookie-btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.cookie-btn-outline:hover {
+  background: var(--bg-secondary);
+  border-color: #cbd5e1;
+}
+
+.cookie-btn-primary {
+  background: var(--accent-cyan);
+  border: 1px solid var(--accent-cyan);
+  color: #ffffff;
+}
+
+.cookie-btn-primary:hover {
+  background: #0082c8;
+  border-color: #0082c8;
+}
+
+@media (max-width: 640px) {
+  .cookie-consent-banner {
+    left: 1rem;
+    right: 1rem;
+    bottom: 5.5rem; /* Acima do botão flutuante do whatsapp */
+    max-width: none;
+  }
+  .floating-cookie-toggle {
+    left: 1rem;
+    bottom: 5.5rem;
+  }
+}
