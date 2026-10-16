@@ -28,7 +28,9 @@ import {
   Plus,
   Minimize2,
   Maximize2,
+  Upload,
 } from 'lucide-react';
+import { normalizePublicImageUrl, readImageFileAsDataUrl } from '../../utils/imageUrl';
 
 interface BlockEditorProps {
   block: BlogBlock;
@@ -536,17 +538,107 @@ const ImageEditor: React.FC<{
   block: ImageBlock;
   onChange: (b: ImageBlock) => void;
 }> = ({ block, onChange }) => {
+  const [loadError, setLoadError] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const normalizedUrl = normalizePublicImageUrl(block.url);
+
+  const handleUrlChange = (val: string) => {
+    setLoadError(false);
+    const normalized = normalizePublicImageUrl(val);
+    onChange({ ...block, url: normalized });
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      setIsUploading(true);
+      setLoadError(false);
+      const dataUrl = await readImageFileAsDataUrl(file);
+      onChange({ ...block, url: dataUrl });
+    } catch (err: any) {
+      alert(err.message || 'Erro ao carregar arquivo de imagem.');
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
   return (
     <div>
-      <div style={{ marginBottom: '0.85rem' }}>
-        <label className="copy-label">URL da Imagem</label>
+      <div style={{ marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+          <label className="copy-label" style={{ margin: 0 }}>URL Pública da Imagem</label>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="btn btn-outline"
+            style={{ padding: '0.25rem 0.65rem', fontSize: '0.78rem', minHeight: '30px', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+            title="Selecione uma imagem do seu computador"
+          >
+            <Upload className="w-3.5 h-3.5" />
+            <span>{isUploading ? 'Carregando...' : 'Carregar do Computador'}</span>
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={handleFileUpload}
+          />
+        </div>
+
         <input
           type="text"
           className="copy-input"
           value={block.url}
-          placeholder="/images/trabalho/telhado.jpg ou URL externa da imagem"
-          onChange={(e) => onChange({ ...block, url: e.target.value })}
+          placeholder="https://exemplo.com/foto.jpg ou link do Google Drive, Dropbox, Imgur"
+          onChange={(e) => handleUrlChange(e.target.value)}
         />
+        <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '0.3rem' }}>
+          💡 Suporta links diretos (PNG, JPG, WebP), compartilhamento do <strong>Google Drive</strong>, <strong>Dropbox</strong>, <strong>Imgur</strong> ou fotos do seu computador.
+        </div>
+
+        {/* Live Preview do Bloco de Imagem */}
+        {block.url && (
+          <div
+            style={{
+              marginTop: '0.75rem',
+              padding: '0.65rem',
+              background: '#f8fafc',
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--border-subtle)',
+              textAlign: 'center',
+            }}
+          >
+            {loadError ? (
+              <div style={{ padding: '0.5rem', color: '#dc2626', fontSize: '0.82rem' }}>
+                ⚠️ Não foi possível carregar esta imagem. Verifique se o link é público e aberto para visualização.
+              </div>
+            ) : (
+              <div style={{ position: 'relative', display: 'inline-block', maxWidth: '100%' }}>
+                <img
+                  src={normalizedUrl}
+                  alt={block.alt || 'Prévia'}
+                  referrerPolicy="no-referrer"
+                  style={{
+                    maxHeight: '180px',
+                    maxWidth: '100%',
+                    borderRadius: 'var(--radius-sm)',
+                    objectFit: 'cover',
+                  }}
+                  onLoad={() => setLoadError(false)}
+                  onError={() => setLoadError(true)}
+                />
+                <div style={{ fontSize: '0.72rem', color: '#16a34a', marginTop: '0.25rem', fontWeight: 600 }}>
+                  ✓ Prévia da imagem carregada com sucesso
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="copy-grid-2">

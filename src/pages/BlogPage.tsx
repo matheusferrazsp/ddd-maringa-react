@@ -12,6 +12,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import '../styles/blog.css';
+import { normalizePublicImageUrl } from '../utils/imageUrl';
 
 export const BlogPage: React.FC = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -115,11 +116,15 @@ export const BlogPage: React.FC = () => {
             <Link to={`/blog/${featuredPost.slug}`} className="blog-featured-card">
               <div className="blog-featured-card__media">
                 <img
-                  src={featuredPost.coverImage}
+                  src={normalizePublicImageUrl(featuredPost.coverImage)}
                   alt={featuredPost.coverImageAlt || featuredPost.title}
                   className="blog-featured-card__img"
+                  referrerPolicy="no-referrer"
                   onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = '/images/trabalho/telhado.jpg';
+                    const img = e.currentTarget as HTMLImageElement;
+                    if (img.src !== '/images/trabalho/telhado.jpg') {
+                      img.src = '/images/trabalho/telhado.jpg';
+                    }
                   }}
                 />
                 <span className="blog-featured-card__badge">Destaque da Semana</span>
@@ -186,11 +191,15 @@ export const BlogPage: React.FC = () => {
                 <Link key={post.id} to={`/blog/${post.slug}`} className="blog-card">
                   <div className="blog-card__media">
                     <img
-                      src={post.coverImage}
+                      src={normalizePublicImageUrl(post.coverImage)}
                       alt={post.coverImageAlt || post.title}
                       className="blog-card__img"
+                      referrerPolicy="no-referrer"
                       onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).src = '/images/trabalho/telhado.jpg';
+                        const img = e.currentTarget as HTMLImageElement;
+                        if (img.src !== '/images/trabalho/telhado.jpg') {
+                          img.src = '/images/trabalho/telhado.jpg';
+                        }
                       }}
                     />
                     <div

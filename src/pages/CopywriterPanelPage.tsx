@@ -42,7 +42,9 @@ import {
   Share2,
   LogOut,
   User as UserIcon,
+  Upload,
 } from 'lucide-react';
+import { normalizePublicImageUrl, readImageFileAsDataUrl } from '../utils/imageUrl';
 import '../styles/blog.css';
 
 export const CopywriterPanelPage: React.FC = () => {
@@ -52,6 +54,31 @@ export const CopywriterPanelPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'editor' | 'preview' | 'seo'>('editor');
   const [saveStatus, setSaveStatus] = useState<string>('Pronto para editar');
   const [newTagInput, setNewTagInput] = useState('');
+  const [coverLoadError, setCoverLoadError] = useState(false);
+  const [isUploadingCover, setIsUploadingCover] = useState(false);
+  const coverFileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleCoverUrlChange = (val: string) => {
+    setCoverLoadError(false);
+    const normalized = normalizePublicImageUrl(val);
+    setCurrentPost((prev) => ({ ...prev, coverImage: normalized }));
+  };
+
+  const handleCoverFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      setIsUploadingCover(true);
+      setCoverLoadError(false);
+      const dataUrl = await readImageFileAsDataUrl(file);
+      setCurrentPost((prev) => ({ ...prev, coverImage: dataUrl }));
+    } catch (err: any) {
+      alert(err.message || 'Erro ao carregar imagem de capa.');
+    } finally {
+      setIsUploadingCover(false);
+      if (coverFileInputRef.current) coverFileInputRef.current.value = '';
+    }
+  };
 
   // Load posts on mount
   useEffect(() => {
@@ -643,14 +670,75 @@ export const CopywriterPanelPage: React.FC = () => {
 
                   {/* Cover Image */}
                   <div className="copy-field">
-                    <label className="copy-label">Imagem de Capa (URL)</label>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                      <label className="copy-label" style={{ margin: 0 }}>Imagem de Capa (URL Pública ou Arquivo)</label>
+                      <button
+                        type="button"
+                        onClick={() => coverFileInputRef.current?.click()}
+                        className="btn btn-outline"
+                        style={{ padding: '0.25rem 0.65rem', fontSize: '0.78rem', minHeight: '30px', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+                        title="Selecione uma imagem de capa do computador"
+                      >
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>{isUploadingCover ? 'Carregando...' : 'Carregar do Computador'}</span>
+                      </button>
+                      <input
+                        ref={coverFileInputRef}
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={handleCoverFileUpload}
+                      />
+                    </div>
                     <input
                       type="text"
                       className="copy-input"
                       value={currentPost.coverImage}
-                      placeholder="/images/trabalho/telhado.jpg ou URL da imagem"
-                      onChange={(e) => setCurrentPost({ ...currentPost, coverImage: e.target.value })}
+                      placeholder="https://exemplo.com/foto.jpg ou link do Google Drive, Dropbox, Imgur"
+                      onChange={(e) => handleCoverUrlChange(e.target.value)}
                     />
+                    <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', marginTop: '0.3rem' }}>
+                      💡 Suporta links diretos (PNG, JPG, WebP), compartilhamento do <strong>Google Drive</strong>, <strong>Dropbox</strong>, <strong>Imgur</strong> ou foto do seu computador.
+                    </div>
+
+                    {/* Live Preview da Imagem de Capa */}
+                    {currentPost.coverImage && (
+                      <div
+                        style={{
+                          marginTop: '0.75rem',
+                          padding: '0.65rem',
+                          background: '#f8fafc',
+                          borderRadius: 'var(--radius-md)',
+                          border: '1px solid var(--border-subtle)',
+                          textAlign: 'center',
+                        }}
+                      >
+                        {coverLoadError ? (
+                          <div style={{ padding: '0.5rem', color: '#dc2626', fontSize: '0.82rem' }}>
+                            ⚠️ Não foi possível carregar a imagem desta URL. Verifique se o link é público e direto.
+                          </div>
+                        ) : (
+                          <div style={{ position: 'relative', display: 'inline-block', maxWidth: '100%' }}>
+                            <img
+                              src={normalizePublicImageUrl(currentPost.coverImage)}
+                              alt={currentPost.coverImageAlt || 'Prévia da Capa'}
+                              referrerPolicy="no-referrer"
+                              style={{
+                                maxHeight: '160px',
+                                maxWidth: '100%',
+                                borderRadius: 'var(--radius-sm)',
+                                objectFit: 'cover',
+                              }}
+                              onLoad={() => setCoverLoadError(false)}
+                              onError={() => setCoverLoadError(true)}
+                            />
+                            <div style={{ fontSize: '0.72rem', color: '#16a34a', marginTop: '0.25rem', fontWeight: 600 }}>
+                              ✓ Imagem de capa carregada com sucesso
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {/* Alt Text & Meta Description */}
@@ -856,11 +944,15 @@ export const CopywriterPanelPage: React.FC = () => {
 
               {currentPost.coverImage && (
                 <img
-                  src={currentPost.coverImage}
+                  src={normalizePublicImageUrl(currentPost.coverImage)}
                   alt={currentPost.coverImageAlt || currentPost.title}
                   className="blog-article__hero-img"
+                  referrerPolicy="no-referrer"
                   onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = '/images/trabalho/telhado.jpg';
+                    const img = e.currentTarget as HTMLImageElement;
+                    if (img.src !== '/images/trabalho/telhado.jpg') {
+                      img.src = '/images/trabalho/telhado.jpg';
+                    }
                   }}
                 />
               )}

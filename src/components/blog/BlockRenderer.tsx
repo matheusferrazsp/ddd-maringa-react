@@ -22,6 +22,7 @@ import {
   Phone,
   Quote,
 } from 'lucide-react';
+import { normalizePublicImageUrl } from '../../utils/imageUrl';
 
 interface BlockRendererProps {
   block: BlogBlock;
@@ -154,11 +155,14 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
 
     case 'image': {
       const b = block as ImageBlock;
+      const imageUrl = normalizePublicImageUrl(b.url);
       return (
         <figure style={{ margin: '2.5rem 0', textAlign: 'center' }}>
           <img
-            src={b.url}
-            alt={b.alt || b.caption}
+            src={imageUrl}
+            alt={b.alt || b.caption || 'Imagem do artigo'}
+            loading="lazy"
+            referrerPolicy="no-referrer"
             style={{
               width: '100%',
               maxHeight: '480px',
@@ -167,7 +171,10 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
               boxShadow: 'var(--shadow-tech)',
             }}
             onError={(e) => {
-              (e.currentTarget as HTMLImageElement).src = '/images/trabalho/telhado.jpg';
+              const img = e.currentTarget as HTMLImageElement;
+              if (img.src !== '/images/trabalho/telhado.jpg') {
+                img.src = '/images/trabalho/telhado.jpg';
+              }
             }}
           />
           {b.caption && (

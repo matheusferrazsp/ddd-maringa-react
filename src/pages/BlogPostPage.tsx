@@ -17,6 +17,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import '../styles/blog.css';
+import { normalizePublicImageUrl } from '../utils/imageUrl';
 
 export const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -208,11 +209,15 @@ export const BlogPostPage: React.FC = () => {
         {/* Featured Cover Image */}
         {post.coverImage && (
           <img
-            src={post.coverImage}
+            src={normalizePublicImageUrl(post.coverImage)}
             alt={post.coverImageAlt || post.title}
             className="blog-article__hero-img"
+            referrerPolicy="no-referrer"
             onError={(e) => {
-              (e.currentTarget as HTMLImageElement).src = '/images/trabalho/telhado.jpg';
+              const img = e.currentTarget as HTMLImageElement;
+              if (img.src !== '/images/trabalho/telhado.jpg') {
+                img.src = '/images/trabalho/telhado.jpg';
+              }
             }}
           />
         )}
