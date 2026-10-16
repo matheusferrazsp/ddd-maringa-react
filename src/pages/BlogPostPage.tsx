@@ -201,16 +201,6 @@ export const BlogPostPage: React.FC = () => {
                 {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
                 <span>{copied ? 'Copiado!' : 'Copiar Link'}</span>
               </button>
-
-              <Link
-                to="/painel-copy"
-                className="btn btn-outline"
-                style={{ minHeight: '36px', padding: '0.35rem 0.85rem', fontSize: '0.82rem' }}
-                title="Editar este post no Painel"
-              >
-                <PenTool className="w-3.5 h-3.5" />
-                <span>Editar Post</span>
-              </Link>
             </div>
           </div>
         </header>

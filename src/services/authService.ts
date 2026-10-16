@@ -47,11 +47,18 @@ export const authService = {
         return { success: true, user: apiRes.user };
       }
     } catch (err: any) {
-      // Se a API retornou erro de credenciais (401), propaga o erro
-      if (err?.message && !err.message.includes('Failed to fetch') && !err.message.includes('NetworkError')) {
-        return { success: false, error: err.message };
+      // Se a API retornou erro de credenciais (401), propaga o erro de senha
+      if (
+        err?.status === 401 ||
+        err?.message?.toLowerCase().includes('inválid') ||
+        err?.message?.toLowerCase().includes('incorret')
+      ) {
+        return { success: false, error: err.message || 'E-mail ou senha incorretos.' };
       }
-      console.warn('API backend offline ou inacessível. Usando fallback local para desenvolvimento.', err);
+      console.warn(
+        'API backend inacessível ou rota estática (Status/Erro: ' + (err?.status || err?.message) + '). Utilizando contingência local.',
+        err
+      );
     }
 
     // 2. Fallback de contingência local para desenvolvimento offline

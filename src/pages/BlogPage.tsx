@@ -141,14 +141,7 @@ export const BlogPage: React.FC = () => {
                 <h2 className="blog-featured-card__title">{featuredPost.title}</h2>
                 <p className="blog-featured-card__excerpt">{featuredPost.excerpt}</p>
 
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginTop: 'auto',
-                  }}
-                >
+                <div className="blog-featured-card__footer">
                   <div className="blog-author-bar">
                     <img
                       src={featuredPost.author.avatar}
@@ -164,7 +157,7 @@ export const BlogPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <span className="blog-card__read-more">
+                  <span className="blog-featured-card__read-more">
                     Ler artigo completo <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
@@ -227,15 +220,15 @@ export const BlogPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <h3 className="blog-card__title">{post.title}</h3>
+                    <h3 className="blog-card__title" title={post.title}>{post.title}</h3>
                     <p className="blog-card__excerpt">{post.excerpt}</p>
 
                     <div className="blog-card__footer">
-                      <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                      <div className="blog-card__author-label" title={post.author.name}>
                         Por {post.author.name}
                       </div>
                       <span className="blog-card__read-more">
-                        Ler artigo <ArrowRight className="w-4 h-4" />
+                        Ler artigo <ArrowRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
                   </div>

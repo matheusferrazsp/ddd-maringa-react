@@ -29,7 +29,7 @@ const INITIAL_POSTS = [
     tags: ['Cupins', 'Controle de Pragas', 'Dicas Residenciais', 'Descupinização'],
     cover_image: '/images/trabalho/telhado.jpg',
     cover_image_alt: 'Técnico especialista da Dedetizadora Maringá inspecionando forro de madeira',
-    author_name: 'Equipe Técnica DDD Maringá',
+    author_name: 'Redação Dedetizadora Maringá',
     author_role: 'Especialistas em Descupinização',
     author_avatar: '/images/logos/favicon-icon.png',
     publish_date: '2026-10-10',
@@ -81,7 +81,7 @@ const INITIAL_POSTS = [
     tags: ['Desentupimento', 'Cozinha', 'Prevenção', 'Hidrojateamento'],
     cover_image: '/images/servicos/area-interna.jpg',
     cover_image_alt: 'Manutenção técnica de tubulação em bancada de cozinha',
-    author_name: 'Equipe Técnica DDD Maringá',
+    author_name: 'Redação Dedetizadora Maringá',
     author_role: 'Técnicos em Desentupimento',
     author_avatar: '/images/logos/favicon-icon.png',
     publish_date: '2026-10-08',
@@ -122,7 +122,7 @@ const INITIAL_POSTS = [
     tags: ['Comercial', 'ANVISA', 'Restaurantes', 'Laudo Técnico'],
     cover_image: '/images/servicos/igreja.jpg',
     cover_image_alt: 'Inspeção sanitária em grande ambiente comercial',
-    author_name: 'Eng. DDD Maringá',
+    author_name: 'Redação Dedetizadora Maringá',
     author_role: 'Responsável Técnico Sanitarista',
     author_avatar: '/images/logos/favicon-icon.png',
     publish_date: '2026-10-05',
@@ -273,6 +273,9 @@ export async function initDb(): Promise<void> {
         );
       }
     }
+
+    // 6. Assegura que todas as postagens no banco tenham como autor oficial a "Redação Dedetizadora Maringá"
+    await client.query("UPDATE posts SET author_name = 'Redação Dedetizadora Maringá' WHERE author_name != 'Redação Dedetizadora Maringá';");
 
     console.log('✅ Banco PostgreSQL sincronizado com sucesso.');
   } catch (error) {

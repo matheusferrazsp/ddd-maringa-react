@@ -22,7 +22,7 @@ export const DEFAULT_POSTS: BlogPost[] = [
     coverImage: '/images/trabalho/telhado.jpg',
     coverImageAlt: 'Técnico especialista da Dedetizadora Maringá inspecionando forro de madeira',
     author: {
-      name: 'Equipe Técnica DDD Maringá',
+      name: 'Redação Dedetizadora Maringá',
       role: 'Especialistas em Descupinização',
       avatar: '/images/logos/favicon-icon.png',
     },
@@ -135,8 +135,8 @@ export const DEFAULT_POSTS: BlogPost[] = [
     coverImage: '/images/trabalho/abracaf.jpg',
     coverImageAlt: 'Equipamento de hidrojateamento e equipe técnica desentupidora maringá',
     author: {
-      name: 'Carlos Oliveira',
-      role: 'Chefe de Operações Hidráulicas',
+      name: 'Redação Dedetizadora Maringá',
+      role: 'Técnicos em Desentupimento',
       avatar: '/images/logos/favicon-icon.png',
     },
     publishDate: '2026-10-08',
@@ -216,8 +216,8 @@ export const DEFAULT_POSTS: BlogPost[] = [
     coverImage: '/images/servicos/igreja.jpg',
     coverImageAlt: 'Técnico aplicando sanitização e controle de pragas em ambiente corporativo',
     author: {
-      name: 'Dra. Mariana Sanches',
-      role: 'Responsável Técnica & Bióloga',
+      name: 'Redação Dedetizadora Maringá',
+      role: 'Consultores em Legislação Sanitária',
       avatar: '/images/logos/favicon-icon.png',
     },
     publishDate: '2026-10-05',
@@ -300,7 +300,15 @@ export const getPosts = (): BlogPost[] => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_POSTS));
       return DEFAULT_POSTS;
     }
-    return parsed;
+    // Garante que todas as matérias utilizem o autor padrão oficial
+    return parsed.map((p: BlogPost) => ({
+      ...p,
+      author: {
+        role: p.author?.role || 'Especialistas em Controle de Pragas & Saneamento',
+        name: 'Redação Dedetizadora Maringá',
+        avatar: p.author?.avatar || '/images/logos/favicon-icon.png',
+      },
+    }));
   } catch (e) {
     console.error('Erro ao ler posts do blog no localStorage:', e);
     return DEFAULT_POSTS;
@@ -327,6 +335,11 @@ export const savePost = (post: BlogPost): void => {
 
   const updatedPost: BlogPost = {
     ...post,
+    author: {
+      role: post.author?.role || 'Especialistas em Controle de Pragas & Saneamento',
+      name: 'Redação Dedetizadora Maringá',
+      avatar: post.author?.avatar || '/images/logos/favicon-icon.png',
+    },
     updatedAt: new Date().toISOString(),
   };
 
@@ -412,8 +425,8 @@ export const createNewPost = (): BlogPost => {
     coverImage: '/images/trabalho/telhado.jpg',
     coverImageAlt: 'Imagem ilustrativa do artigo',
     author: {
-      name: 'Especialista DDD Maringá',
-      role: 'Redator Técnico',
+      name: 'Redação Dedetizadora Maringá',
+      role: 'Redação Técnica Especializada',
       avatar: '/images/logos/favicon-icon.png',
     },
     publishDate: new Date().toISOString().split('T')[0],

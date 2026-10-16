@@ -16,8 +16,8 @@ function mapRowToBlogPost(row: any) {
     coverImage: row.cover_image,
     coverImageAlt: row.cover_image_alt,
     author: {
-      name: row.author_name || 'Equipe DDD Maringá',
-      role: row.author_role || 'Redação Técnica',
+      name: row.author_name || 'Redação Dedetizadora Maringá',
+      role: row.author_role || 'Redação Especializada',
       avatar: row.author_avatar || '/images/logos/favicon-icon.png',
     },
     publishDate: row.publish_date,
@@ -137,8 +137,8 @@ postRouter.post('/admin/posts', requireAuth, async (req: AuthenticatedRequest, r
     }
 
     const id = post.id || `post-${Date.now()}`;
-    const authorName = post.author?.name || req.user?.name || 'Débora Pedrialli';
-    const authorRole = post.author?.role || 'Copywriter';
+    const authorName = 'Redação Dedetizadora Maringá';
+    const authorRole = post.author?.role || 'Redação Especializada';
     const authorAvatar = post.author?.avatar || '/images/logos/favicon-icon.png';
     const authorId = req.user?.id || null;
 
