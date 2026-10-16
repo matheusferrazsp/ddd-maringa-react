@@ -58,6 +58,7 @@ export const Navbar: React.FC = () => {
           { href: "/sobre", label: "Sobre Nós" },
           { href: "/servicos", label: "Nossos Serviços" },
           { href: "/empresas", label: "Para Empresas (PJ)", highlight: true },
+          { href: "/blog", label: "Blog & Dicas" },
           { href: "/contato", label: "Fale Conosco / Contato" },
         ].map((item) => (
           <Link
@@ -134,6 +135,9 @@ export const Navbar: React.FC = () => {
             </Link>
             <Link to="/empresas" className="navbar__nav-link--b2b">
               Empresas (PJ)
+            </Link>
+            <Link to="/blog" className="navbar__nav-link">
+              Blog
             </Link>
             <Link to="/contato" className="navbar__nav-link">
               Contato
