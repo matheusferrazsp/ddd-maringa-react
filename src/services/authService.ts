@@ -12,7 +12,7 @@ export const AUTHORIZED_USERS: Array<User & { passwordHash: string }> = [
     email: 'mccdeborapedrialli@gmail.com',
     role: 'copywriter',
     avatar: '/images/logos/favicon-icon.png',
-    passwordHash: 'debora2026',
+    passwordHash: 'Debora#@$2026',
   },
   {
     id: 'user-admin-1',

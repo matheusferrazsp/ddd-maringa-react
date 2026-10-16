@@ -204,9 +204,9 @@ export async function initDb(): Promise<void> {
 
     // 3. Seed: Usuária Débora Pedrialli (Copywriter)
     const deboraCheck = await client.query('SELECT id FROM users WHERE email = $1', ['mccdeborapedrialli@gmail.com']);
+    const deboraHash = await bcrypt.hash('Debora#@$2026', 10);
     if (deboraCheck.rows.length === 0) {
       console.log('🌱 Criando usuário oficial Débora Pedrialli no banco...');
-      const deboraHash = await bcrypt.hash('debora2026', 10);
       await client.query(
         `INSERT INTO users (id, name, email, password_hash, role, avatar)
          VALUES ($1, $2, $3, $4, $5, $6)`,
@@ -219,6 +219,9 @@ export async function initDb(): Promise<void> {
           '/images/logos/favicon-icon.png',
         ]
       );
+    } else {
+      // Atualiza a senha no banco se o usuário já existir
+      await client.query('UPDATE users SET password_hash = $1 WHERE email = $2', [deboraHash, 'mccdeborapedrialli@gmail.com']);
     }
 
     // 4. Seed: Administrador Técnico

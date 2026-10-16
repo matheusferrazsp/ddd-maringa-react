@@ -100,7 +100,7 @@ Na primeira inicialização do banco, os usuários são criados automaticamente 
 
 1. **Redatora / Copywriter Oficial**:
    - **E-mail**: `mccdeborapedrialli@gmail.com`
-   - **Senha**: `debora2026`
+   - **Senha**: `Debora#@$2026`
    - **Papel**: `copywriter`
 
 2. **Administrador**:
