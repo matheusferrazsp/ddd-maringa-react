@@ -369,15 +369,6 @@ export const CopywriterPanelPage: React.FC = () => {
     downloadAnchor.remove();
   };
 
-  // Preset image selection
-  const COVER_PRESETS = [
-    { label: 'Telhado / Forro', url: '/images/trabalho/telhado.jpg' },
-    { label: 'Hidrojateamento', url: '/images/trabalho/abracaf.jpg' },
-    { label: 'Área Externa', url: '/images/servicos/area-externa.jpg' },
-    { label: 'Área Interna', url: '/images/servicos/area-interna.jpg' },
-    { label: 'Comercial PJ', url: '/images/servicos/igreja.jpg' },
-  ];
-
   // Copywriting headline hooks presets
   const COPY_HOOKS = [
     {
@@ -650,35 +641,16 @@ export const CopywriterPanelPage: React.FC = () => {
                     />
                   </div>
 
-                  {/* Cover Image & Presets */}
+                  {/* Cover Image */}
                   <div className="copy-field">
                     <label className="copy-label">Imagem de Capa (URL)</label>
                     <input
                       type="text"
                       className="copy-input"
                       value={currentPost.coverImage}
-                      placeholder="/images/trabalho/telhado.jpg"
+                      placeholder="/images/trabalho/telhado.jpg ou URL da imagem"
                       onChange={(e) => setCurrentPost({ ...currentPost, coverImage: e.target.value })}
                     />
-
-                    <div style={{ marginTop: '0.65rem' }}>
-                      <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: 600 }}>
-                        Fotos Recomendadas da Empresa:
-                      </span>
-                      <div className="copy-image-presets">
-                        {COVER_PRESETS.map((p) => (
-                          <button
-                            key={p.url}
-                            type="button"
-                            className={`copy-preset-img-btn ${currentPost.coverImage === p.url ? 'active' : ''}`}
-                            onClick={() => setCurrentPost({ ...currentPost, coverImage: p.url })}
-                            title={p.label}
-                          >
-                            <img src={p.url} alt={p.label} />
-                          </button>
-                        ))}
-                      </div>
-                    </div>
                   </div>
 
                   {/* Alt Text & Meta Description */}

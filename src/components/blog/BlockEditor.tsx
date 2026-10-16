@@ -536,14 +536,6 @@ const ImageEditor: React.FC<{
   block: ImageBlock;
   onChange: (b: ImageBlock) => void;
 }> = ({ block, onChange }) => {
-  const PRESET_IMAGES = [
-    { label: 'Telhado / Forro', url: '/images/trabalho/telhado.jpg' },
-    { label: 'Hidrojateamento', url: '/images/trabalho/abracaf.jpg' },
-    { label: 'Área Externa', url: '/images/servicos/area-externa.jpg' },
-    { label: 'Área Interna', url: '/images/servicos/area-interna.jpg' },
-    { label: 'Comercial / PJ', url: '/images/servicos/igreja.jpg' },
-  ];
-
   return (
     <div>
       <div style={{ marginBottom: '0.85rem' }}>
@@ -552,35 +544,9 @@ const ImageEditor: React.FC<{
           type="text"
           className="copy-input"
           value={block.url}
-          placeholder="/images/trabalho/telhado.jpg ou URL externa"
+          placeholder="/images/trabalho/telhado.jpg ou URL externa da imagem"
           onChange={(e) => onChange({ ...block, url: e.target.value })}
         />
-
-        <div style={{ marginTop: '0.5rem' }}>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-            Ou escolha uma foto oficial da DDD Maringá:
-          </span>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.35rem' }}>
-            {PRESET_IMAGES.map((img) => (
-              <button
-                key={img.url}
-                type="button"
-                onClick={() => onChange({ ...block, url: img.url })}
-                style={{
-                  fontSize: '0.75rem',
-                  padding: '0.25rem 0.55rem',
-                  borderRadius: '4px',
-                  border: '1px solid var(--border-subtle)',
-                  background: block.url === img.url ? 'var(--accent-cyan)' : '#f8fafc',
-                  color: block.url === img.url ? '#fff' : 'var(--text-secondary)',
-                  cursor: 'pointer',
-                }}
-              >
-                {img.label}
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
 
       <div className="copy-grid-2">
