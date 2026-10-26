@@ -88,6 +88,11 @@ export const Footer: React.FC = () => {
                   Fale Conosco
                 </Link>
               </li>
+              <li>
+                <Link to="/dedetizadora-embu-das-artes" className="footer__nav-link">
+                  Dedetizadora em Embu das Artes
+                </Link>
+              </li>
             </ul>
           </div>
 

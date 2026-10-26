@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 import { ShieldCheck, Award, Briefcase, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
 
 export const AboutUs: React.FC = () => {
@@ -25,7 +26,19 @@ export const AboutUs: React.FC = () => {
             Tradição e <span className="gradient-text-cyan">Profissionalismo</span>
           </h2>
           <p className="section-subtitle">
-            Somos uma empresa séria, pautada pela honestidade, profissionalismo e coerência, garantindo sempre o trabalho correto para nossos clientes.
+            Somos uma empresa séria, pautada pela honestidade, profissionalismo e coerência, garantindo sempre o trabalho correto para nossos clientes. Atuamos com base própria como{" "}
+            <Link
+              to="/dedetizadora-embu-das-artes"
+              style={{
+                color: "var(--accent-cyan-dark)",
+                fontWeight: 700,
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
+              }}
+            >
+              dedetizadora em Embu das Artes
+            </Link>{" "}
+            e em toda a Grande São Paulo.
           </p>
         </div>
 

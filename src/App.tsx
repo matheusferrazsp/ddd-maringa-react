@@ -11,6 +11,7 @@ const ServicesPage = lazy(() => import("./pages/ServicesPage").then((m) => ({ de
 const CorporatePage = lazy(() => import("./pages/CorporatePage").then((m) => ({ default: m.CorporatePage })));
 const ContactPage = lazy(() => import("./pages/ContactPage").then((m) => ({ default: m.ContactPage })));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage").then((m) => ({ default: m.PrivacyPolicyPage })));
+const DedetizadoraEmbuPage = lazy(() => import("./pages/DedetizadoraEmbuPage").then((m) => ({ default: m.DedetizadoraEmbuPage })));
 const BlogPage = lazy(() => import("./pages/BlogPage").then((m) => ({ default: m.BlogPage })));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage").then((m) => ({ default: m.BlogPostPage })));
 const CopywriterPanelPage = lazy(() => import("./pages/CopywriterPanelPage").then((m) => ({ default: m.CopywriterPanelPage })));
@@ -62,6 +63,7 @@ const AppContent: React.FC = () => {
             />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/contato" element={<ContactPage />} />
+            <Route path="/dedetizadora-embu-das-artes" element={<DedetizadoraEmbuPage />} />
             <Route path="/politica-de-privacidade" element={<PrivacyPolicyPage />} />
           </Routes>
         </Suspense>

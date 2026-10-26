@@ -1,7 +1,16 @@
 import React from "react";
-import { ShieldCheck, Award, Target, Users } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ShieldCheck, Award, Target, Users, MapPin } from "lucide-react";
+import { usePageSEO } from "../utils/seo";
 
 export const AboutPage: React.FC = () => {
+  usePageSEO({
+    title: "Sobre a Dedetizadora Maringá | Controle de Pragas em SP",
+    description:
+      "Conheça a história, os valores e a estrutura da Dedetizadora Maringá. Sede em Embu das Artes e 6 anos de experiência em dedetização e desentupimento na Grande SP.",
+    canonical: "https://dedetizadoramaringa.com.br/sobre",
+  });
+
   return (
     <div style={{ paddingTop: "80px", minHeight: "100vh" }}>
       <section
@@ -38,6 +47,35 @@ export const AboutPage: React.FC = () => {
                 no mercado, fazendo um trabalho correto e profissional. Nosso
                 compromisso é ser uma empresa coerente, justa, honesta, com foco
                 absoluto na excelência e na total satisfação do cliente.
+              </p>
+              <p
+                style={{
+                  fontSize: "1.02rem",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.75,
+                  marginTop: "1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "0.35rem",
+                }}
+              >
+                <MapPin className="w-4 h-4" style={{ color: "var(--accent-cyan)", flexShrink: 0 }} />
+                <span>
+                  Com sede própria na região, atuamos como{" "}
+                  <Link
+                    to="/dedetizadora-embu-das-artes"
+                    style={{
+                      color: "var(--accent-cyan-dark)",
+                      fontWeight: 700,
+                      textDecoration: "underline",
+                      textUnderlineOffset: "3px",
+                    }}
+                  >
+                    dedetizadora em Embu das Artes
+                  </Link>{" "}
+                  e atendemos toda a Grande São Paulo.
+                </span>
               </p>
               <div style={{ display: "flex", gap: "1.5rem", marginTop: "2rem" }}>
                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--accent-cyan)", fontWeight: 700 }}>

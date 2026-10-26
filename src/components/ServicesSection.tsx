@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -200,7 +201,20 @@ export const ServicesSection: React.FC = () => {
           </h2>
           <p className="section-subtitle">
             Selecione uma especialidade na barra lateral abaixo para conferir
-            todos os detalhes técnicos do protocolo.
+            todos os detalhes técnicos do protocolo. Contamos com atendimento
+            local de{" "}
+            <Link
+              to="/dedetizadora-embu-das-artes"
+              style={{
+                color: "var(--accent-cyan-dark)",
+                fontWeight: 700,
+                textDecoration: "underline",
+                textUnderlineOffset: "3px",
+              }}
+            >
+              dedetizadora em Embu das Artes
+            </Link>{" "}
+            e equipes em toda a região metropolitana.
           </p>
         </div>
 
