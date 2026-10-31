@@ -766,3 +766,101 @@
   }
 }
 
+/* ==========================================================================
+   SERVICE PAGE EXTENSIONS (Descupinização & Service Landing Pages)
+   ========================================================================== */
+
+.dm-signals-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+.dm-signal-item {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--accent-cyan);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.35rem;
+  box-shadow: var(--shadow-tech);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.dm-signal-item__icon {
+  color: var(--accent-cyan-dark);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.dm-signals-note {
+  background: #f0f9ff;
+  border: 1px solid rgba(2, 132, 199, 0.25);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dm-types-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.dm-types-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.dm-types-summary {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.68;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.35rem;
+}
+
+.dm-method-note {
+  margin-top: 1.5rem;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--accent-emerald);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  box-shadow: var(--shadow-tech);
+}
+
+@media (min-width: 640px) {
+  .dm-signals-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .dm-types-layout {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 2.75rem;
+    align-items: center;
+  }
+}
+
+

@@ -162,7 +162,171 @@ const EMBU_SCHEMA_JSON_LD = {
   ]
 };
 
+const DESCUPINIZACAO_SCHEMA_JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://dedetizadoramaringa.com.br/#empresa",
+      "name": "Dedetizadora Maringá",
+      "url": "https://dedetizadoramaringa.com.br/",
+      "telephone": "+55-11-94072-4379",
+      "description":
+        "Empresa de controle de pragas sediada em Embu das Artes (SP): dedetização de baratas, desratização, descupinização, controle de mosquitos e percevejos e manejo de pombos e morcegos.",
+      "areaServed": [
+        { "@type": "City", "name": "Embu das Artes" },
+        { "@type": "City", "name": "Taboão da Serra" },
+        { "@type": "City", "name": "Itapecerica da Serra" },
+        { "@type": "City", "name": "Cotia" },
+        { "@type": "City", "name": "Osasco" },
+        { "@type": "City", "name": "Barueri" },
+        { "@type": "City", "name": "Carapicuíba" },
+        { "@type": "City", "name": "Santana de Parnaíba" },
+        { "@type": "City", "name": "Itapevi" },
+        { "@type": "City", "name": "Jandira" },
+        { "@type": "City", "name": "Vargem Grande Paulista" },
+        { "@type": "City", "name": "Embu-Guaçu" },
+        { "@type": "City", "name": "São Lourenço da Serra" },
+        { "@type": "City", "name": "São Paulo" }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://dedetizadoramaringa.com.br/descupinizacao#servico",
+      "name": "Descupinização",
+      "serviceType": "Controle de cupins",
+      "provider": {
+        "@id": "https://dedetizadoramaringa.com.br/#empresa"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Embu das Artes" },
+        { "@type": "City", "name": "Taboão da Serra" },
+        { "@type": "City", "name": "Itapecerica da Serra" },
+        { "@type": "City", "name": "Cotia" },
+        { "@type": "City", "name": "Osasco" },
+        { "@type": "City", "name": "Barueri" },
+        { "@type": "City", "name": "Carapicuíba" },
+        { "@type": "City", "name": "Santana de Parnaíba" },
+        { "@type": "City", "name": "Itapevi" },
+        { "@type": "City", "name": "Jandira" },
+        { "@type": "City", "name": "Vargem Grande Paulista" },
+        { "@type": "City", "name": "Embu-Guaçu" },
+        { "@type": "City", "name": "São Lourenço da Serra" },
+        { "@type": "City", "name": "São Paulo" }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://dedetizadoramaringa.com.br/descupinizacao",
+      "url": "https://dedetizadoramaringa.com.br/descupinizacao",
+      "name": "Descupinização: tratamento de cupins | Dedetizadora Maringá",
+      "inLanguage": "pt-BR",
+      "about": {
+        "@id": "https://dedetizadoramaringa.com.br/descupinizacao#servico"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Início",
+            "item": "https://dedetizadoramaringa.com.br/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Serviços",
+            "item": "https://dedetizadoramaringa.com.br/servicos"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Descupinização",
+            "item": "https://dedetizadoramaringa.com.br/descupinizacao"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://dedetizadoramaringa.com.br/descupinizacao#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qual a diferença entre descupinização e dedetização?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dedetização é o nome popular para o controle de pragas em geral, como baratas e formigas. Descupinização é o tratamento específico contra cupins, com vistoria e técnicas próprias para madeira e, quando necessário, para o solo e a estrutura do imóvel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O cupim passa de um móvel para outro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pode passar. O cupim de madeira seca se espalha para peças próximas, e o cupim de solo pode chegar a vários cômodos pelo mesmo caminho. Por isso a vistoria verifica as madeiras ao redor do ponto onde o problema apareceu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Dá para tratar só o móvel atacado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende do tipo de cupim. Quando o ataque é de cupim de madeira seca e está restrito a uma peça, o tratamento pode ser localizado. No cupim de solo, tratar apenas o móvel não resolve, porque a colônia continua fora dele."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Apartamento também tem cupim?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tem. Em apartamentos, o cupim costuma aparecer em móveis planejados, portas, rodapés e armários. Se a origem estiver na estrutura do prédio, a solução passa pelo condomínio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vale mais a pena trocar a madeira do que tratar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende do estado da peça. Madeira muito comprometida precisa ser substituída, mas sem tratar o foco a peça nova também pode ser atacada. A vistoria indica o que pode ser tratado e o que precisa ser trocado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto custa uma descupinização?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O valor depende do tipo de cupim, da quantidade de peças, da área atingida e do acesso aos focos — e por isso só é definido depois da vistoria no imóvel. As fotos enviadas pelo WhatsApp ajudam a preparar essa visita."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O que mandar pelo WhatsApp para pedir orçamento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fotos do pó, dos furos ou dos túneis de terra, os cômodos onde o problema aparece, o tipo de imóvel e o bairro. Com isso agendamos a vistoria."
+          }
+        }
+      ]
+    }
+  ]
+};
+
 const routes = [
+  {
+    route: "descupinizacao",
+    title: "Descupinização: tratamento de cupins | Dedetizadora Maringá",
+    description:
+      "Descupinização para cupim de madeira seca e cupim de solo em casas, apartamentos, condomínios e empresas. Mande fotos e peça orçamento pelo WhatsApp.",
+    canonical: "https://dedetizadoramaringa.com.br/descupinizacao",
+    ogTitle: "Descupinização — Dedetizadora Maringá",
+    ogDescription:
+      "Tratamento de cupim de madeira seca e cupim de solo na região oeste e sudoeste da Grande São Paulo. Orçamento pelo WhatsApp (11) 94072-4379.",
+    ogImage:
+      "https://dedetizadoramaringa.com.br/images/dedetizadora-maringa-descupinizacao-vistoria-og.jpg",
+    jsonLd: DESCUPINIZACAO_SCHEMA_JSON_LD,
+  },
   {
     route: "dedetizadora-embu-das-artes",
     title: "Dedetizadora em Embu das Artes | Dedetizadora Maringá",

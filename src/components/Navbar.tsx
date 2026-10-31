@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Phone, Menu, X, ChevronRight } from "lucide-react";
+import { Phone, Menu, X, ChevronRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(true);
+  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,24 +55,88 @@ export const Navbar: React.FC = () => {
 
       {/* Drawer Nav Links */}
       <nav className="navbar__mobile-nav">
-        {[
-          { href: "/", label: "Início" },
-          { href: "/sobre", label: "Sobre Nós" },
-          { href: "/servicos", label: "Nossos Serviços" },
-          { href: "/empresas", label: "Para Empresas (PJ)", highlight: true },
-          { href: "/blog", label: "Blog & Dicas" },
-          { href: "/contato", label: "Fale Conosco / Contato" },
-        ].map((item) => (
-          <Link
-            key={item.href}
-            to={item.href}
-            onClick={() => setMobileMenuOpen(false)}
-            className={`navbar__mobile-link-card ${item.highlight ? "highlight" : ""}`}
+        <Link
+          to="/"
+          onClick={() => setMobileMenuOpen(false)}
+          className="navbar__mobile-link-card"
+        >
+          <span>Início</span>
+          <ChevronRight className="w-5 h-5 text-slate-400" />
+        </Link>
+
+        <Link
+          to="/sobre"
+          onClick={() => setMobileMenuOpen(false)}
+          className="navbar__mobile-link-card"
+        >
+          <span>Sobre Nós</span>
+          <ChevronRight className="w-5 h-5 text-slate-400" />
+        </Link>
+
+        {/* Submenu Nossos Serviços (Mobile) */}
+        <div className="navbar__mobile-submenu-group">
+          <button
+            type="button"
+            onClick={() => setMobileServicesOpen((prev) => !prev)}
+            className="navbar__mobile-link-card navbar__mobile-submenu-trigger"
+            aria-expanded={mobileServicesOpen}
           >
-            <span>{item.label}</span>
-            <ChevronRight className="w-5 h-5 text-slate-400" />
-          </Link>
-        ))}
+            <span>Nossos Serviços</span>
+            <ChevronDown
+              className={`w-5 h-5 text-slate-400 transition-transform duration-200 ${
+                mobileServicesOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {mobileServicesOpen && (
+            <div className="navbar__mobile-submenu-list">
+              <Link
+                to="/servicos"
+                onClick={() => setMobileMenuOpen(false)}
+                className="navbar__mobile-sublink"
+              >
+                <span>Visão Geral de Serviços</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </Link>
+              <Link
+                to="/descupinizacao"
+                onClick={() => setMobileMenuOpen(false)}
+                className="navbar__mobile-sublink"
+              >
+                <span>Descupinização</span>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </Link>
+            </div>
+          )}
+        </div>
+
+        <Link
+          to="/empresas"
+          onClick={() => setMobileMenuOpen(false)}
+          className="navbar__mobile-link-card highlight"
+        >
+          <span>Para Empresas (PJ)</span>
+          <ChevronRight className="w-5 h-5 text-slate-400" />
+        </Link>
+
+        <Link
+          to="/blog"
+          onClick={() => setMobileMenuOpen(false)}
+          className="navbar__mobile-link-card"
+        >
+          <span>Blog & Dicas</span>
+          <ChevronRight className="w-5 h-5 text-slate-400" />
+        </Link>
+
+        <Link
+          to="/contato"
+          onClick={() => setMobileMenuOpen(false)}
+          className="navbar__mobile-link-card"
+        >
+          <span>Fale Conosco / Contato</span>
+          <ChevronRight className="w-5 h-5 text-slate-400" />
+        </Link>
       </nav>
 
       {/* Drawer Bottom Actions */}
@@ -130,9 +196,62 @@ export const Navbar: React.FC = () => {
             <Link to="/sobre" className="navbar__nav-link">
               Sobre Nós
             </Link>
-            <Link to="/servicos" className="navbar__nav-link">
-              Serviços
-            </Link>
+
+            {/* Submenu Serviços (Desktop) */}
+            <div
+              className="navbar__dropdown"
+              onMouseEnter={() => setDesktopServicesOpen(true)}
+              onMouseLeave={() => setDesktopServicesOpen(false)}
+            >
+              <Link
+                to="/servicos"
+                className="navbar__nav-link navbar__dropdown-trigger"
+                aria-haspopup="true"
+                aria-expanded={desktopServicesOpen}
+              >
+                <span>Serviços</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    desktopServicesOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </Link>
+
+              <div
+                className={`navbar__dropdown-menu ${
+                  desktopServicesOpen ? "open" : ""
+                }`}
+                role="menu"
+              >
+                <Link
+                  to="/servicos"
+                  className="navbar__dropdown-item"
+                  role="menuitem"
+                  onClick={() => setDesktopServicesOpen(false)}
+                >
+                  <span className="navbar__dropdown-item-title">
+                    Todos os Serviços
+                  </span>
+                  <span className="navbar__dropdown-item-desc">
+                    Visão geral de controle de pragas e desentupimento
+                  </span>
+                </Link>
+                <Link
+                  to="/descupinizacao"
+                  className="navbar__dropdown-item"
+                  role="menuitem"
+                  onClick={() => setDesktopServicesOpen(false)}
+                >
+                  <span className="navbar__dropdown-item-title">
+                    Descupinização
+                  </span>
+                  <span className="navbar__dropdown-item-desc">
+                    Tratamento de cupim de madeira seca e cupim de solo
+                  </span>
+                </Link>
+              </div>
+            </div>
+
             <Link to="/empresas" className="navbar__nav-link--b2b">
               Empresas (PJ)
             </Link>
