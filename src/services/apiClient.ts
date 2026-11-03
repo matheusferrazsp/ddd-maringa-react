@@ -4,12 +4,19 @@
 
 const TOKEN_KEY = 'ddd_maringa_jwt_token';
 const DEFAULT_API_URL = 'https://ddd-maringa-react-production.up.railway.app/api';
-const rawBase = (import.meta.env.VITE_API_URL || DEFAULT_API_URL).trim();
-const API_BASE = rawBase === '/api'
-  ? '/api'
-  : rawBase.endsWith('/api')
-  ? rawBase
-  : `${rawBase.replace(/\/$/, '')}/api`;
+
+function resolveApiBase(): string {
+  let raw = (import.meta.env.VITE_API_URL || DEFAULT_API_URL).trim();
+  if (!raw || raw === '/api') {
+    raw = DEFAULT_API_URL;
+  } else if (!raw.startsWith('http://') && !raw.startsWith('https://') && !raw.startsWith('/')) {
+    raw = `https://${raw}`;
+  }
+  raw = raw.replace(/\/+$/, '');
+  return raw.endsWith('/api') ? raw : `${raw}/api`;
+}
+
+const API_BASE = resolveApiBase();
 
 function getToken(): string | null {
   return localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
