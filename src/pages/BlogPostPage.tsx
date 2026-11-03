@@ -22,6 +22,7 @@ import { normalizePublicImageUrl } from '../utils/imageUrl';
 export const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPost | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [copied, setCopied] = useState(false);
   const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
 
@@ -32,21 +33,29 @@ export const BlogPostPage: React.FC = () => {
       const found = getPostBySlug(slug);
       if (found) {
         setPost(found);
+        setIsLoading(false);
         document.title = `${found.title} | Blog DDD Maringá`;
         window.scrollTo(0, 0);
       } else {
         setPost(null);
+        setIsLoading(true);
       }
 
       // Sincroniza com o PostgreSQL em background
-      syncPostsFromApi().then((all) => {
-        const freshFound = all.find((p) => p.slug === slug);
-        if (freshFound) {
-          setPost(freshFound);
-          document.title = `${freshFound.title} | Blog DDD Maringá`;
-        }
-        setAllPosts(all.filter((p) => p.status === 'published'));
-      });
+      syncPostsFromApi()
+        .then((all) => {
+          const freshFound = all.find((p) => p.slug === slug);
+          if (freshFound) {
+            setPost(freshFound);
+            document.title = `${freshFound.title} | Blog DDD Maringá`;
+          }
+          setAllPosts(all.filter((p) => p.status === 'published'));
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
     }
   }, [slug]);
 
@@ -93,6 +102,22 @@ export const BlogPostPage: React.FC = () => {
 
   const whatsappDirectUrl =
     'https://wa.me/+5511940724379?text=Ol%C3%A1!%20Li%20o%20artigo%20no%20blog%20e%20gostaria%20de%20um%20or%C3%A7amento.';
+
+  if (isLoading && !post) {
+    return (
+      <div className="blog-article" style={{ padding: '8rem 1rem 5rem', textAlign: 'center' }}>
+        <div className="container" style={{ maxWidth: '640px' }}>
+          <ShieldCheck className="w-16 h-16 mx-auto text-sky-500 mb-4 animate-pulse" style={{ color: '#0284c7' }} />
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.75rem' }}>
+            Carregando artigo...
+          </h1>
+          <p style={{ color: 'var(--text-secondary)' }}>
+            Buscando o conteúdo atualizado da Redação Dedetizadora Maringá.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (

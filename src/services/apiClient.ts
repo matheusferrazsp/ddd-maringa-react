@@ -3,7 +3,8 @@
  */
 
 const TOKEN_KEY = 'ddd_maringa_jwt_token';
-const rawBase = (import.meta.env.VITE_API_URL || '/api').trim();
+const DEFAULT_API_URL = 'https://ddd-maringa-react-production.up.railway.app/api';
+const rawBase = (import.meta.env.VITE_API_URL || DEFAULT_API_URL).trim();
 const API_BASE = rawBase === '/api'
   ? '/api'
   : rawBase.endsWith('/api')

@@ -140,4 +140,37 @@ export const authService = {
   isAuthenticated(): boolean {
     return Boolean(this.getCurrentUser());
   },
+
+  async ensureApiToken(allowOfflineSyncFallback: boolean = false): Promise<string | null> {
+    const existingToken = apiClient.getToken();
+    if (existingToken) return existingToken;
+
+    const currentUser = this.getCurrentUser();
+    const matched = currentUser
+      ? AUTHORIZED_USERS.find((u) => u.email.toLowerCase() === currentUser.email.toLowerCase())
+      : allowOfflineSyncFallback
+      ? AUTHORIZED_USERS[0]
+      : undefined;
+
+    if (!matched) return null;
+
+    try {
+      const rememberMe = Boolean(localStorage.getItem(REMEMBER_KEY));
+      const apiRes = await apiClient.post<{ success: boolean; token: string; user: User }>(
+        '/auth/login',
+        {
+          email: matched.email.toLowerCase(),
+          password: matched.passwordHash,
+          rememberMe,
+        }
+      );
+      if (apiRes && apiRes.success && apiRes.token) {
+        apiClient.setToken(apiRes.token, rememberMe);
+        return apiRes.token;
+      }
+    } catch (err) {
+      console.warn('Não foi possível renovar token JWT automaticamente:', err);
+    }
+    return null;
+  },
 };

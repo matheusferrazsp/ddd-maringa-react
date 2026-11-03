@@ -1,5 +1,6 @@
 import type { BlogPost } from '../types/blog';
 import { apiClient } from './apiClient';
+import { authService } from './authService';
 
 const STORAGE_KEY = 'ddd_maringa_blog_posts_v1';
 
@@ -351,9 +352,10 @@ export const savePost = (post: BlogPost): void => {
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
 
-  // Sincroniza com a API PostgreSQL em segundo plano
-  apiClient
-    .post<BlogPost>('/admin/posts', updatedPost)
+  // Sincroniza com a API PostgreSQL em segundo plano (garantindo token JWT)
+  authService
+    .ensureApiToken(true)
+    .then(() => apiClient.post<BlogPost>('/admin/posts', updatedPost))
     .catch((err) => {
       console.warn('Post salvo localmente. Sincronização com API PostgreSQL pendente:', err);
     });
@@ -367,8 +369,9 @@ export const deletePost = (id: string): boolean => {
   }
 
   // Sincroniza exclusão com a API PostgreSQL em segundo plano
-  apiClient
-    .delete(`/admin/posts/${id}`)
+  authService
+    .ensureApiToken(true)
+    .then(() => apiClient.delete(`/admin/posts/${id}`))
     .catch((err) => {
       console.warn('Post removido localmente. Sincronização de exclusão com API PostgreSQL pendente:', err);
     });
@@ -377,16 +380,62 @@ export const deletePost = (id: string): boolean => {
 };
 
 /**
- * Sincroniza matérias da API PostgreSQL para o cache local
+ * Sincroniza matérias da API PostgreSQL para o cache local e envia matérias locais pendentes
  */
 export const syncPostsFromApi = async (): Promise<BlogPost[]> => {
   try {
+    const localPosts = getPosts();
+    const defaultIds = new Set(DEFAULT_POSTS.map((d) => d.id));
+
+    await authService.ensureApiToken();
     const isAuth = Boolean(apiClient.getToken());
     const endpoint = isAuth ? '/admin/posts' : '/posts';
     const remotePosts = await apiClient.get<BlogPost[]>(endpoint);
-    if (Array.isArray(remotePosts) && remotePosts.length > 0) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(remotePosts));
-      return remotePosts;
+
+    if (Array.isArray(remotePosts)) {
+      const remoteById = new Map(remotePosts.map((p) => [p.id, p]));
+      const remoteBySlug = new Map(remotePosts.map((p) => [p.slug, p]));
+
+      // Identifica matérias criadas localmente (quando a API estava offline) que ainda não subiram para o PostgreSQL
+      const unsyncedLocalPosts = localPosts.filter((lp) => {
+        if (defaultIds.has(lp.id)) return false;
+        const matchRemote = remoteById.get(lp.id) || remoteBySlug.get(lp.slug);
+        if (!matchRemote) return true;
+        return new Date(lp.updatedAt).getTime() > new Date(matchRemote.updatedAt).getTime();
+      });
+
+      // Se houver matérias locais não sincronizadas, envia automaticamente para o PostgreSQL
+      if (unsyncedLocalPosts.length > 0) {
+        const token = await authService.ensureApiToken(true);
+        if (token) {
+          for (const unsynced of unsyncedLocalPosts) {
+            try {
+              const saved = await apiClient.post<BlogPost>('/admin/posts', unsynced);
+              remoteById.set(saved.id, saved);
+              remoteBySlug.set(saved.slug, saved);
+            } catch (syncErr) {
+              console.warn('Falha ao sincronizar matéria local pendente:', syncErr);
+            }
+          }
+        }
+      }
+
+      // Mescla preservando matérias locais não sincronizadas + matérias do PostgreSQL
+      const mergedMap = new Map<string, BlogPost>();
+      for (const lp of unsyncedLocalPosts) {
+        mergedMap.set(lp.id, lp);
+      }
+      for (const rp of remotePosts) {
+        if (!mergedMap.has(rp.id)) {
+          mergedMap.set(rp.id, rp);
+        }
+      }
+
+      const mergedPosts = Array.from(mergedMap.values());
+      if (mergedPosts.length > 0) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(mergedPosts));
+        return mergedPosts;
+      }
     }
   } catch (err) {
     // API offline ou em desenvolvimento, fallback silencioso para cache local
