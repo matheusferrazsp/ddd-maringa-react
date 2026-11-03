@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   ChevronDown,
   ChevronUp,
+  ExternalLink,
   HelpCircle,
   Info,
   Lightbulb,
@@ -23,6 +24,65 @@ import {
   Quote,
 } from 'lucide-react';
 import { normalizePublicImageUrl } from '../../utils/imageUrl';
+
+function normalizeHref(rawUrl: string): string {
+  const trimmed = rawUrl.trim();
+  if (!trimmed) return '#';
+  if (
+    trimmed.startsWith('http://') ||
+    trimmed.startsWith('https://') ||
+    trimmed.startsWith('/') ||
+    trimmed.startsWith('#') ||
+    trimmed.startsWith('mailto:') ||
+    trimmed.startsWith('tel:')
+  ) {
+    return trimmed;
+  }
+  return `https://${trimmed}`;
+}
+
+export function renderRichText(text: string): React.ReactNode {
+  if (!text) return null;
+
+  // Suporta links no formato [texto](url) e negrito **texto**
+  const tokenRegex = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = tokenRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+
+    if (match[1] !== undefined && match[2] !== undefined) {
+      const label = match[1];
+      const href = normalizeHref(match[2]);
+      const isExternal = href.startsWith('http://') || href.startsWith('https://');
+      parts.push(
+        <a
+          key={`link-${match.index}`}
+          href={href}
+          target={isExternal ? '_blank' : undefined}
+          rel={isExternal ? 'noopener noreferrer' : undefined}
+          className="blog-inline-link"
+        >
+          {label}
+        </a>
+      );
+    } else if (match[3] !== undefined) {
+      parts.push(<strong key={`bold-${match.index}`}>{match[3]}</strong>);
+    }
+
+    lastIndex = tokenRegex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : text;
+}
 
 interface BlockRendererProps {
   block: BlogBlock;
@@ -55,13 +115,28 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
 
     case 'paragraph': {
       const b = block as ParagraphBlock;
+      const optHref = b.linkUrl ? normalizeHref(b.linkUrl) : '';
+      const isOptExternal = optHref.startsWith('http://') || optHref.startsWith('https://');
       return (
         <div className="block-paragraph">
           {b.content.split('\n\n').map((paragraph, index) => (
             <p key={index} style={{ marginBottom: '1rem' }}>
-              {paragraph}
+              {renderRichText(paragraph)}
             </p>
           ))}
+          {b.linkUrl && b.linkText && (
+            <div style={{ marginTop: '0.75rem' }}>
+              <a
+                href={optHref}
+                target={isOptExternal ? '_blank' : undefined}
+                rel={isOptExternal ? 'noopener noreferrer' : undefined}
+                className="blog-optional-link-btn"
+              >
+                <span>{b.linkText}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          )}
         </div>
       );
     }
@@ -74,6 +149,8 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
       } else if (b.variant === 'warning') {
         icon = <AlertTriangle className="w-5 h-5 flex-shrink-0" />;
       }
+      const optHref = b.linkUrl ? normalizeHref(b.linkUrl) : '';
+      const isOptExternal = optHref.startsWith('http://') || optHref.startsWith('https://');
 
       return (
         <div className={`block-callout block-callout--${b.variant}`}>
@@ -81,7 +158,20 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
             {icon}
             <span>{b.title}</span>
           </div>
-          <div className="block-callout__text">{b.content}</div>
+          <div className="block-callout__text">{renderRichText(b.content)}</div>
+          {b.linkUrl && b.linkText && (
+            <div style={{ marginTop: '0.85rem' }}>
+              <a
+                href={optHref}
+                target={isOptExternal ? '_blank' : undefined}
+                rel={isOptExternal ? 'noopener noreferrer' : undefined}
+                className="blog-optional-link-btn"
+              >
+                <span>{b.linkText}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          )}
         </div>
       );
     }
@@ -131,7 +221,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
             {b.items.map((item, idx) => (
               <li key={idx} className="block-checklist__item">
                 <CheckCircle2 className="w-5 h-5 block-checklist__icon" />
-                <span>{item}</span>
+                <span>{renderRichText(item)}</span>
               </li>
             ))}
           </ul>
@@ -144,7 +234,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
       return (
         <div className="block-quote">
           <Quote className="w-7 h-7 text-sky-400 mb-2 opacity-60" style={{ color: '#0284c7' }} />
-          <p className="block-quote__text">"{b.quote}"</p>
+          <p className="block-quote__text">"{renderRichText(b.quote)}"</p>
           <div>
             <span className="block-quote__author">— {b.author}</span>
             {b.role && <span className="block-quote__role">({b.role})</span>}
@@ -199,7 +289,7 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({ block }) => {
         <div className="block-stat">
           <div className="block-stat__number">{b.number}</div>
           <div className="block-stat__label">{b.label}</div>
-          {b.description && <div className="block-stat__desc">{b.description}</div>}
+          {b.description && <div className="block-stat__desc">{renderRichText(b.description)}</div>}
         </div>
       );
     }
@@ -250,7 +340,7 @@ const FaqAccordionBlock: React.FC<{ block: FaqBlock }> = ({ block }) => {
                   <ChevronDown className="w-5 h-5 text-slate-500 flex-shrink-0" />
                 )}
               </button>
-              {isOpen && <div className="block-faq__answer">{item.answer}</div>}
+              {isOpen && <div className="block-faq__answer">{renderRichText(item.answer)}</div>}
             </div>
           );
         })}

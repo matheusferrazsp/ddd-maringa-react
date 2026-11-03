@@ -29,6 +29,8 @@ import {
   Minimize2,
   Maximize2,
   Upload,
+  Link2,
+  X,
 } from 'lucide-react';
 import { normalizePublicImageUrl, readImageFileAsDataUrl } from '../../utils/imageUrl';
 
@@ -290,27 +292,444 @@ const HeadingEditor: React.FC<{
   );
 };
 
+const QUICK_INTERNAL_LINKS = [
+  { label: 'Descupinização', url: '/descupinizacao' },
+  { label: 'Dedetizadora Embu', url: '/dedetizadora-embu-das-artes' },
+  { label: 'Serviços', url: '/servicos' },
+  { label: 'WhatsApp', url: 'https://wa.me/+5511940724379' },
+];
+
+const RichTextarea: React.FC<{
+  label: string;
+  value: string;
+  onChange: (newVal: string) => void;
+  placeholder?: string;
+  minHeight?: string;
+  showWordCount?: boolean;
+}> = ({ label, value, onChange, placeholder, minHeight = '120px', showWordCount = false }) => {
+  const textareaRef = React.useRef<HTMLTextAreaElement>(null);
+  const [showLinkBox, setShowLinkBox] = useState(false);
+  const [linkText, setLinkText] = useState('');
+  const [linkUrl, setLinkUrl] = useState('');
+  const [selectionRange, setSelectionRange] = useState<{ start: number; end: number }>({ start: 0, end: 0 });
+
+  const plainTextForCount = value.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1');
+  const wordCount = plainTextForCount.trim() ? plainTextForCount.trim().split(/\s+/).length : 0;
+
+  // Extract existing inline links [texto](url) to display badges below the textarea
+  const existingLinks = React.useMemo(() => {
+    const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+    const found: Array<{ fullMatch: string; text: string; url: string; index: number }> = [];
+    let m: RegExpExecArray | null;
+    while ((m = regex.exec(value)) !== null) {
+      found.push({
+        fullMatch: m[0],
+        text: m[1],
+        url: m[2],
+        index: m.index,
+      });
+    }
+    return found;
+  }, [value]);
+
+  const handleOpenLinkTool = () => {
+    const el = textareaRef.current;
+    if (el) {
+      const start = el.selectionStart ?? value.length;
+      const end = el.selectionEnd ?? value.length;
+      const selected = value.slice(start, end);
+      setSelectionRange({ start, end });
+      setLinkText(selected || '');
+    } else {
+      setSelectionRange({ start: value.length, end: value.length });
+      setLinkText('');
+    }
+    setLinkUrl('');
+    setShowLinkBox(true);
+  };
+
+  const handleInsertLink = () => {
+    const cleanText = linkText.trim() || linkUrl.trim();
+    let cleanUrl = linkUrl.trim();
+    if (!cleanText || !cleanUrl) return;
+
+    if (
+      !cleanUrl.startsWith('http://') &&
+      !cleanUrl.startsWith('https://') &&
+      !cleanUrl.startsWith('/') &&
+      !cleanUrl.startsWith('#') &&
+      !cleanUrl.startsWith('mailto:') &&
+      !cleanUrl.startsWith('tel:')
+    ) {
+      cleanUrl = `https://${cleanUrl}`;
+    }
+
+    const markdownLink = `[${cleanText}](${cleanUrl})`;
+    const { start, end } = selectionRange;
+    const before = value.slice(0, start);
+    const after = value.slice(end);
+    const needLeadingSpace = before.length > 0 && start === end && !/\s$/.test(before);
+    const updated = `${before}${needLeadingSpace ? ' ' : ''}${markdownLink}${after}`;
+
+    onChange(updated);
+    setShowLinkBox(false);
+    setLinkText('');
+    setLinkUrl('');
+  };
+
+  const handleRemoveInlineLink = (fullMatch: string, plainLabel: string) => {
+    onChange(value.replace(fullMatch, plainLabel));
+  };
+
+  return (
+    <div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: '0.5rem',
+          flexWrap: 'wrap',
+          marginBottom: '0.45rem',
+        }}
+      >
+        <label className="copy-label" style={{ margin: 0 }}>
+          {label}
+        </label>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <button
+            type="button"
+            onClick={() => (showLinkBox ? setShowLinkBox(false) : handleOpenLinkTool())}
+            className="btn btn-outline"
+            style={{
+              padding: '0.2rem 0.65rem',
+              minHeight: '28px',
+              fontSize: '0.76rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              borderColor: showLinkBox ? 'var(--accent-cyan)' : undefined,
+              color: showLinkBox ? 'var(--accent-cyan-dark)' : undefined,
+              background: showLinkBox ? 'rgba(2, 132, 199, 0.08)' : undefined,
+            }}
+            title="Selecione um trecho do texto (ou clique aqui) para inserir um link"
+          >
+            <Link2 className="w-3.5 h-3.5 text-sky-600" />
+            <span>Inserir Link</span>
+          </button>
+
+          {showWordCount && (
+            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
+              {wordCount} palavras • {plainTextForCount.length} caracteres
+            </span>
+          )}
+        </div>
+      </div>
+
+      {showLinkBox && (
+        <div
+          style={{
+            marginBottom: '0.65rem',
+            padding: '0.85rem',
+            borderRadius: 'var(--radius-md)',
+            background: '#f0f9ff',
+            border: '1px solid rgba(2, 132, 199, 0.28)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '0.55rem',
+            }}
+          >
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#0369a1', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+              <Link2 className="w-3.5 h-3.5" /> Inserir Link no Texto
+            </span>
+            <button
+              type="button"
+              onClick={() => setShowLinkBox(false)}
+              className="copy-icon-btn"
+              style={{ width: '24px', height: '24px' }}
+              title="Fechar"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <div className="copy-grid-2" style={{ marginBottom: '0.55rem' }}>
+            <div>
+              <label className="copy-label" style={{ fontSize: '0.74rem' }}>
+                Texto que ficará clicável
+              </label>
+              <input
+                type="text"
+                className="copy-input"
+                value={linkText}
+                placeholder="Ex: estudo na Scientia Agricola"
+                onChange={(e) => setLinkText(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="copy-label" style={{ fontSize: '0.74rem' }}>
+                URL / Link de Destino
+              </label>
+              <input
+                type="text"
+                className="copy-input"
+                value={linkUrl}
+                placeholder="https://... ou /descupinizacao"
+                onChange={(e) => setLinkUrl(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleInsertLink();
+                  }
+                }}
+              />
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '0.5rem',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Atalhos:</span>
+              {QUICK_INTERNAL_LINKS.map((q) => (
+                <button
+                  key={q.url}
+                  type="button"
+                  onClick={() => {
+                    setLinkUrl(q.url);
+                    if (!linkText.trim()) setLinkText(q.label);
+                  }}
+                  style={{
+                    fontSize: '0.72rem',
+                    padding: '0.15rem 0.5rem',
+                    borderRadius: '9999px',
+                    border: '1px solid rgba(2, 132, 199, 0.25)',
+                    background: '#ffffff',
+                    color: '#0369a1',
+                    cursor: 'pointer',
+                    fontWeight: 600,
+                  }}
+                >
+                  {q.label}
+                </button>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', gap: '0.45rem' }}>
+              <button
+                type="button"
+                className="btn btn-outline"
+                onClick={() => setShowLinkBox(false)}
+                style={{ minHeight: '30px', padding: '0.25rem 0.7rem', fontSize: '0.78rem' }}
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className="btn btn-cyan"
+                onClick={handleInsertLink}
+                disabled={!linkUrl.trim()}
+                style={{
+                  minHeight: '30px',
+                  padding: '0.25rem 0.85rem',
+                  fontSize: '0.78rem',
+                  opacity: linkUrl.trim() ? 1 : 0.5,
+                }}
+              >
+                Aplicar Link
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <textarea
+        ref={textareaRef}
+        className="copy-textarea"
+        style={{ minHeight }}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+      />
+
+      {existingLinks.length > 0 && (
+        <div
+          style={{
+            marginTop: '0.45rem',
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '0.4rem',
+          }}
+        >
+          <span style={{ fontSize: '0.73rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+            Links no texto:
+          </span>
+          {existingLinks.map((lnk, i) => (
+            <span
+              key={`${lnk.index}-${i}`}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                padding: '0.15rem 0.55rem',
+                borderRadius: '9999px',
+                background: '#f0f9ff',
+                border: '1px solid rgba(2, 132, 199, 0.22)',
+                fontSize: '0.74rem',
+                color: '#0369a1',
+              }}
+            >
+              <Link2 className="w-3 h-3" />
+              <strong>{lnk.text}</strong>
+              <span style={{ color: '#64748b', maxWidth: '180px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                ({lnk.url})
+              </span>
+              <button
+                type="button"
+                onClick={() => handleRemoveInlineLink(lnk.fullMatch, lnk.text)}
+                title="Remover link (mantendo o texto)"
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  color: '#64748b',
+                  cursor: 'pointer',
+                  padding: 0,
+                  display: 'inline-flex',
+                }}
+              >
+                <X className="w-3 h-3" />
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const OptionalBlockLinkEditor: React.FC<{
+  linkText?: string;
+  linkUrl?: string;
+  onChange: (linkText?: string, linkUrl?: string) => void;
+}> = ({ linkText, linkUrl, onChange }) => {
+  const hasLink = Boolean(linkText !== undefined || linkUrl !== undefined);
+
+  if (!hasLink) {
+    return (
+      <div style={{ marginTop: '0.6rem' }}>
+        <button
+          type="button"
+          onClick={() => onChange('', '')}
+          className="btn btn-outline"
+          style={{
+            minHeight: '30px',
+            padding: '0.25rem 0.7rem',
+            fontSize: '0.76rem',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+          }}
+        >
+          <Link2 className="w-3.5 h-3.5 text-sky-600" />
+          <span>+ Adicionar Botão de Link Opcional no Fim do Bloco</span>
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        marginTop: '0.75rem',
+        padding: '0.75rem',
+        borderRadius: 'var(--radius-md)',
+        background: '#f8fafc',
+        border: '1px solid var(--border-subtle)',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '0.5rem',
+        }}
+      >
+        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-primary)', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+          <Link2 className="w-3.5 h-3.5 text-sky-600" /> Botão / Link Opcional do Bloco
+        </span>
+        <button
+          type="button"
+          onClick={() => onChange(undefined, undefined)}
+          className="copy-icon-btn danger"
+          style={{ width: '24px', height: '24px' }}
+          title="Remover botão de link opcional"
+        >
+          <Trash2 className="w-3.5 h-3.5" />
+        </button>
+      </div>
+
+      <div className="copy-grid-2">
+        <div>
+          <label className="copy-label" style={{ fontSize: '0.74rem' }}>
+            Texto do Botão / Link
+          </label>
+          <input
+            type="text"
+            className="copy-input"
+            value={linkText || ''}
+            placeholder="Ex: Acessar estudo completo ou Ver página de Descupinização"
+            onChange={(e) => onChange(e.target.value, linkUrl || '')}
+          />
+        </div>
+        <div>
+          <label className="copy-label" style={{ fontSize: '0.74rem' }}>
+            URL de Destino
+          </label>
+          <input
+            type="text"
+            className="copy-input"
+            value={linkUrl || ''}
+            placeholder="https://... ou /descupinizacao"
+            onChange={(e) => onChange(linkText || '', e.target.value)}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ParagraphEditor: React.FC<{
   block: ParagraphBlock;
   onChange: (b: ParagraphBlock) => void;
 }> = ({ block, onChange }) => {
-  const wordCount = block.content.trim() ? block.content.trim().split(/\s+/).length : 0;
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
-        <label className="copy-label" style={{ margin: 0 }}>
-          Conteúdo do Parágrafo
-        </label>
-        <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-          {wordCount} palavras • {block.content.length} caracteres
-        </span>
-      </div>
-      <textarea
-        className="copy-textarea"
-        style={{ minHeight: '120px' }}
+      <RichTextarea
+        label="Conteúdo do Parágrafo"
         value={block.content}
-        placeholder="Escreva seu parágrafo persuasivo aqui. Pressione Enter duas vezes para quebrar linhas se desejar."
-        onChange={(e) => onChange({ ...block, content: e.target.value })}
+        onChange={(content) => onChange({ ...block, content })}
+        placeholder="Escreva seu parágrafo persuasivo aqui. Selecione qualquer palavra e clique em 'Inserir Link' para adicionar um hiperlink."
+        minHeight="120px"
+        showWordCount
+      />
+      <OptionalBlockLinkEditor
+        linkText={block.linkText}
+        linkUrl={block.linkUrl}
+        onChange={(linkText, linkUrl) => onChange({ ...block, linkText, linkUrl })}
       />
     </div>
   );
@@ -346,15 +765,18 @@ const CalloutEditor: React.FC<{
           />
         </div>
       </div>
-      <div>
-        <label className="copy-label">Mensagem em Destaque</label>
-        <textarea
-          className="copy-textarea"
-          value={block.content}
-          placeholder="Texto de impacto para prender a atenção do leitor..."
-          onChange={(e) => onChange({ ...block, content: e.target.value })}
-        />
-      </div>
+      <RichTextarea
+        label="Mensagem em Destaque"
+        value={block.content}
+        onChange={(content) => onChange({ ...block, content })}
+        placeholder="Texto de impacto para prender a atenção do leitor..."
+        minHeight="90px"
+      />
+      <OptionalBlockLinkEditor
+        linkText={block.linkText}
+        linkUrl={block.linkUrl}
+        onChange={(linkText, linkUrl) => onChange({ ...block, linkText, linkUrl })}
+      />
     </div>
   );
 };
@@ -500,12 +922,12 @@ const QuoteEditor: React.FC<{
   return (
     <div>
       <div style={{ marginBottom: '0.85rem' }}>
-        <label className="copy-label">Frase de Citação / Depoimento</label>
-        <textarea
-          className="copy-textarea"
+        <RichTextarea
+          label="Frase de Citação / Depoimento"
           value={block.quote}
+          onChange={(quote) => onChange({ ...block, quote })}
           placeholder="Insira a frase marcante do especialista ou depoimento de cliente..."
-          onChange={(e) => onChange({ ...block, quote: e.target.value })}
+          minHeight="80px"
         />
       </div>
       <div className="copy-grid-2">
@@ -695,15 +1117,13 @@ const StatEditor: React.FC<{
           />
         </div>
       </div>
-      <div>
-        <label className="copy-label">Explicação Detalhada</label>
-        <textarea
-          className="copy-textarea"
-          value={block.description}
-          placeholder="Ex: Uma única colônia de cupins pode destruir metros de vigas..."
-          onChange={(e) => onChange({ ...block, description: e.target.value })}
-        />
-      </div>
+      <RichTextarea
+        label="Explicação Detalhada"
+        value={block.description}
+        onChange={(description) => onChange({ ...block, description })}
+        placeholder="Ex: Uma única colônia de cupins pode destruir metros de vigas..."
+        minHeight="80px"
+      />
     </div>
   );
 };
@@ -777,12 +1197,12 @@ const FaqEditor: React.FC<{
               placeholder="Pergunta..."
               onChange={(e) => updateItem(idx, 'question', e.target.value)}
             />
-            <textarea
-              className="copy-textarea"
-              style={{ minHeight: '60px' }}
+            <RichTextarea
+              label="Resposta"
               value={item.answer}
+              onChange={(answer) => updateItem(idx, 'answer', answer)}
               placeholder="Resposta..."
-              onChange={(e) => updateItem(idx, 'answer', e.target.value)}
+              minHeight="65px"
             />
           </div>
         ))}

@@ -23,6 +23,8 @@ export interface HeadingBlock extends BaseBlock {
 export interface ParagraphBlock extends BaseBlock {
   type: 'paragraph';
   content: string;
+  linkText?: string;
+  linkUrl?: string;
 }
 
 export interface CalloutBlock extends BaseBlock {
@@ -30,6 +32,8 @@ export interface CalloutBlock extends BaseBlock {
   variant: 'tip' | 'warning' | 'info';
   title: string;
   content: string;
+  linkText?: string;
+  linkUrl?: string;
 }
 
 export interface CtaBlock extends BaseBlock {
