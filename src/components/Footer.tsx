@@ -1,5 +1,5 @@
 import React from "react";
-import { Phone, MapPin } from "lucide-react";
+import { Phone, MapPin, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Footer: React.FC = () => {
@@ -32,6 +32,30 @@ export const Footer: React.FC = () => {
               residência ou empresa com honestidade, pontualidade e métodos 100%
               sustentáveis e seguros.
             </p>
+
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.55rem",
+                padding: "0.45rem 0.85rem",
+                marginBottom: "1.25rem",
+                borderRadius: "0.65rem",
+                background: "#f8fafc",
+                border: "1px solid var(--border-subtle)",
+                fontSize: "0.82rem",
+                color: "var(--text-secondary)",
+              }}
+            >
+              <ShieldCheck
+                className="w-4 h-4 flex-shrink-0"
+                style={{ color: "#00a8ff" }}
+              />
+              <span>
+                <strong style={{ color: "var(--text-primary)" }}>CNPJ:</strong>{" "}
+                37.986.137/0001-77
+              </span>
+            </div>
 
             <div className="footer__socials">
               <a
@@ -191,8 +215,11 @@ export const Footer: React.FC = () => {
 
         <div className="footer__bottom">
           <p>
-            © {new Date().getFullYear()} Dedetizadora e Desentupidora Maringá.
-            Todos os direitos reservados.{" "}
+            © {new Date().getFullYear()} Dedetizadora e Desentupidora Maringá —{" "}
+            <span style={{ fontWeight: 600, color: "var(--text-secondary)" }}>
+              CNPJ: 37.986.137/0001-77
+            </span>
+            . Todos os direitos reservados.{" "}
             <Link to="/politica-de-privacidade" style={{ color: "var(--text-muted)", textDecoration: "underline", marginLeft: "10px" }}>
               Política de Privacidade
             </Link>
